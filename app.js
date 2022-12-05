@@ -8,10 +8,11 @@ const indexRouter = require("./index/route/indexRoute");
 const accountRouter = require('./accounts/route/accountsRoute');
 const productRouter = require('./product/route/productRoute');
 const infoRouter = require('./information/routes/info');
+const all_product = require('./all-product/route');
 
 const app = express();
 
-var views = ['./public/asset', './index/view', './error', './accounts/view', './product/view', './information/view'];
+var views = ['./public/asset', './index/view', './error', './accounts/view', './product/view', './information/view', './all-product/view'];
 
 app.set("views", views);
 app.set("view engine", "hbs");
@@ -26,6 +27,7 @@ app.use("/", indexRouter);
 app.use('/account', accountRouter);
 app.use('/product', productRouter);
 app.use('/info', infoRouter);
+app.use('/app-product', all_product);
 
 
 
