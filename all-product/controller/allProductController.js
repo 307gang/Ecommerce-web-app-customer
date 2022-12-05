@@ -42,5 +42,5 @@ var product_list = [
 ];
 
 module.exports = (req, res) => {
-  res.render("all-product", { product_list });
+  res.render("all-product", {product_list, originalUrl: req.baseUrl});
 };
