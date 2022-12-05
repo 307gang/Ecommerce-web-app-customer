@@ -1,6 +1,6 @@
 var product_list = [
     {
-        product_name: "san pham 1",
+            product_name: "san pham 1",
         product_image: "/asset/img/ao-blazer1.jpg",
         product_price: "72,000"
     },
