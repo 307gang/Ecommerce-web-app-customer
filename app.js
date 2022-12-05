@@ -4,10 +4,16 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 
+<<<<<<< HEAD
 const indexRouter = require("./index/route/index");
 const accountRouter = require('./accounts/route/user');
 const productRouter = require('./product/route/product');
 const infoRouter = require('./information/routes/info');
+=======
+const indexRouter = require("./index/route/indexRoute");
+const accountRouter = require('./accounts/route/accountsRoute');
+const productRouter = require('./product/route/productRoute');
+>>>>>>> 997e81858dbfb62b429243860e9b1cf5dd88ac32
 
 const app = express();
 

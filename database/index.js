@@ -1,15 +1,17 @@
-import mysql from "mysql2/promise";
+// get the client
+const mysql = require('mysql2/promise');
 
-const database = { connection: null };
+const db = {connection: null};
 
 (async () => {
-  database.connection = await mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    database: "ecommerce",
-    password: "123",
+  // create the connection to database
+  db.connection = await mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    database: 'eshopper'
   });
-  console.log("Database connected");
+  console.log('Database connected!');
 })();
 
-module.exports = database;
+
+module.exports = db;
