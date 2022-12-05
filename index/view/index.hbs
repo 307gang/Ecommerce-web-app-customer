@@ -1,5 +1,4 @@
 <body>
-
     <!-- Header-->
     <header class="p-3 mb-2 bg-info bg-gradient py-5" style="--bs-bg-opacity: .5;">
         <div class="container px-4 px-lg-5 my-5">
@@ -9,34 +8,32 @@
             </div>
         </div>
     </header>
-    <!-- Section-->
 
-    <section class="py-5">
-        <div class="container px-4 px-lg-5 mt-5">
-            {{#each product as |pd|}}
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="{{product_image}}" width="450" height="300" />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">{{product_name}}</h5>
-                                <!-- Product price-->
-                                {{price}}
+    <div class="container">
+        <div class="group-clothes mt-4">
+            <div class="row">
+                {{#each productLandingPage}}
+                <div class="col-md-3 col-sm-6 col-12 mb-5">
+                    <div class="card" style="width: 280px;">
+                        <img src="{{product_image}}" width="280" height="350" class="card-img-top" alt="...">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">{{product_name}}</h5>
+                            <div class="d-flex justify-content-center small text-warning mb-2">
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
                             </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Thêm vào giỏ hàng</a>
+                            <p class="card-text">{{product_price}}</p>
+                            <div class="d-grid gap-2 col-6 mx-auto">
+                                <button class="btn btn-outline-info" type="button">Xem chi tiết</button>
                             </div>
                         </div>
                     </div>
                 </div>
+                {{/each}}
             </div>
-            {{/each}}
         </div>
-    </section>
+    </div>
 </body>

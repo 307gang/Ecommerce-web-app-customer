@@ -4,11 +4,11 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 
-const indexRouter = require("./index/route/indexRoute");
-const accountRouter = require('./accounts/route/accountsRoute');
-const productRouter = require('./product/route/productRoute');
+const indexRouter = require("./index/routes/indexRoute");
+const accountRouter = require('./accounts/routes/accountsRoute');
+const productRouter = require('./product/routes/productRoute');
 const infoRouter = require('./information/routes/info');
-const all_product = require('./all-product/route');
+const allProductRouter = require('./all-product/routes/index');
 
 const app = express();
 
@@ -27,7 +27,7 @@ app.use("/", indexRouter);
 app.use('/account', accountRouter);
 app.use('/product', productRouter);
 app.use('/info', infoRouter);
-app.use('/app-product', all_product);
+app.use('/all-product', allProductRouter);
 
 
 
