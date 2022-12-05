@@ -7,8 +7,8 @@ const logger = require("morgan");
 const indexRouter = require("./index/routes/indexRoute");
 const accountRouter = require('./accounts/routes/accountsRoute');
 const productRouter = require('./product/routes/productRoute');
-const infoRouter = require('./information/routes/info');
-const allProductRouter = require('./all-product/routes/index');
+const infoRouter = require('./information/routes/infoRoute');
+const allProductRouter = require('./all-product/routes/allProductRoute');
 
 const app = express();
 
