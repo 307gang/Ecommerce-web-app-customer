@@ -7,10 +7,11 @@ const logger = require("morgan");
 const indexRouter = require("./index/route/index");
 const accountRouter = require('./accounts/route/user');
 const productRouter = require('./product/route/product');
+const infoRouter = require('./information/routes/info');
 
 const app = express();
 
-var views = ['./public/asset', './index/view', './error', './accounts/view', './product/view'];
+var views = ['./public/asset', './index/view', './error', './accounts/view', './product/view', './information/view'];
 
 app.set("views", views);
 app.set("view engine", "hbs");
@@ -24,6 +25,7 @@ app.use(express.static("./public"));
 app.use("/", indexRouter);
 app.use('/account', accountRouter);
 app.use('/product', productRouter);
+app.use('/info', infoRouter);
 
 
 
