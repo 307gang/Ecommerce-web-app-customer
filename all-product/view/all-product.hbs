@@ -18,9 +18,9 @@
                         Sort by
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
-                        <li><a class="dropdown-item" href="{{originalUrl}}?search=&sort=release_date">Latest</a></li>
-                        <li><a class="dropdown-item" href="{{originalUrl}}?search=&sort=popularity">Popularity</a></li>
-                        <li><a class="dropdown-item" href="{{originalUrl}}?search=&sort=price">Best Rating</a></li>
+                        <li><a class="dropdown-item" href="{{originalUrl}}?search=&sortBy=created_date&sortOrder=asc">Mới nhất</a></li>
+                        <li><a class="dropdown-item" href="{{originalUrl}}?search=&sortBy=price&sortOrder=asc">Giá tăng dần</a></li>
+                        <li><a class="dropdown-item" href="{{originalUrl}}?search=&sortBy=price&sortOrder=desc">Giá giảm dần</a></li>
                     </ul>
                 </div>
             </div>
@@ -41,7 +41,7 @@
                                 <div class="bi-star-fill"></div>
                                 <div class="bi-star-fill"></div>
                             </div>
-                            <p class="card-text">{{product_price}}</p>
+                            <p class="card-text">{{multiply price 1000}} VND</p>
                             <div class="d-grid gap-2 col-6 mx-auto">
                                 <a class="btn btn-outline-info" type="button" href="/product/{{product_id}}">Xem chi tiết</a>
                             </div>

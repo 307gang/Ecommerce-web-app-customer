@@ -42,14 +42,18 @@
 // ];
 
 const getProductsList = require('../model/getProductList');
+const getSortProductList = require('../model/getSortProductList')
 
 module.exports = (req, res) => {
   (async () => {
-    const result = await getProductsList(req);
-    const {search, sort} = req.query;
-    console.log(search);
-    console.log(sort);
-    //console.log(result);
-    res.render("all-product", {product_list: result.products, originalUrl: req.baseUrl});
+    const {search, sortBy, sortOrder} = req.query;
+    if (sortBy != ""){
+      var result = await getSortProductList(req);
+      res.render("all-product", {product_list: result.products, originalUrl: req.baseUrl});
+    }
+    else{
+      var result = await getProductsList(req);
+      res.render("all-product", {product_list: result.products, originalUrl: req.baseUrl});
+    }
   })();
 };

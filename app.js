@@ -3,6 +3,7 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+var hbs = require('hbs');
 
 const indexRouter = require("./index/routes/indexRoute");
 const accountRouter = require('./accounts/routes/accountsRoute');
@@ -14,6 +15,8 @@ const database = require('./database/route/productsRoute');
 const app = express();
 
 var views = ['./public/asset', './index/view', './error', './accounts/view', './product/view', './information/view', './all-product/view'];
+
+hbs.registerHelper('multiply', function (a, b) { return a * b; });
 
 app.set("views", views);
 app.set("view engine", "hbs");

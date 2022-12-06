@@ -8,8 +8,8 @@
                 <div class="col-md-6">
                     <h1 class="display-5 fw-bolder">{{product.product_name}}</h1>
                     <div class="fs-5 mb-5">
-                        <span class="text-decoration-line-through">{{product.price}}</span>
-                        <span>{{price}}</span>
+                        <span class="text-decoration-line-through">{{multiply product.price 1000}}</span>
+                        <span>{{multiply product.price 1000}}VND</span>
                     </div>
                     <p class="lead">
                         {{product.description}}
@@ -109,8 +109,8 @@
                                     <div class="bi-star-fill"></div>
                                 </div>
                                 <!-- Product price-->
-                                <span class="text-muted text-decoration-line-through">{{product.price}}</span>
-                                {{product.price}}
+                                <span class="text-muted text-decoration-line-through">{{multiply product.price 1000}}</span>
+                                {{multiply product.price 1000}}
                             </div>
                         </div>
                         <!-- Product actions-->
