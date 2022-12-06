@@ -9,7 +9,7 @@ const accountRouter = require('./accounts/routes/accountsRoute');
 const productRouter = require('./product/routes/productRoute');
 const infoRouter = require('./information/routes/info');
 const allProductRouter = require('./all-product/routes/index');
-const database = require('./database/route/databaseRoute');
+const database = require('./database/route/productsRoute');
 
 const app = express();
 
@@ -29,7 +29,7 @@ app.use('/account', accountRouter);
 app.use('/product', productRouter);
 app.use('/info', infoRouter);
 app.use('/all-product', allProductRouter);
-app.use('/database', database);
+app.use('/database/products', database);
 
 
 
