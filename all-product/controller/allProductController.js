@@ -46,6 +46,9 @@ const getProductsList = require('../model/getProductList');
 module.exports = (req, res) => {
   (async () => {
     const result = await getProductsList(req);
+    const {search, sort} = req.query;
+    console.log(search);
+    console.log(sort);
     //console.log(result);
     res.render("all-product", {product_list: result.products, originalUrl: req.baseUrl});
   })();
