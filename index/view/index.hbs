@@ -12,7 +12,7 @@
     <div class="container">
         <div class="group-clothes mt-4">
             <div class="row">
-                {{#each productLandingPage}}
+                {{#each products}}
                 <div class="col-md-3 col-sm-6 col-12 mb-5">
                     <div class="card" style="width: 280px;">
                         <img src="{{product_image}}" width="280" height="350" class="card-img-top" alt="...">
@@ -27,7 +27,7 @@
                             </div>
                             <p class="card-text">{{product_price}}</p>
                             <div class="d-grid gap-2 col-6 mx-auto">
-                                <a class="btn btn-outline-info" href="#" role="button">Xem chi tiết</a>
+                                <a class="btn btn-outline-info" href="/product/{{product_id}}" role="button">Xem chi tiết</a>
                             </div>
                         </div>
                     </div>
