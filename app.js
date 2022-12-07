@@ -15,8 +15,6 @@ const productDatabase = require('./database/route/productsRoute');
 const categoryDatabase = require('./database/route/categoriesRoute');
 const brandDatabase = require('./database/route/brandsRoute');
 
-const filterRouter = require("./filter/routes/filterRoute");
-
 const app = express();
 
 var views = [
@@ -27,7 +25,6 @@ var views = [
   "./product/view",
   "./information/view",
   "./all-product/view",
-  "./filter/view",
 ];
 
 hbs.registerHelper('multiply', function (a, b) { return a * b; });
@@ -49,7 +46,6 @@ app.use('/all-product', allProductRouter);
 app.use('/database/products', productDatabase);
 app.use('/database/categories', categoryDatabase);
 app.use('/database/brands', brandDatabase);
-app.use("/filter", filterRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
