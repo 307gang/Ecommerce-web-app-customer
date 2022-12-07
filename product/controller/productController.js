@@ -6,6 +6,6 @@ module.exports = (req, res, next) => {
         var {id} = req.params;
         const result = await getProductById(req, id);
         if (result.error == 404) next(createError(404));
-        res.render('detail', {product: result});
+        res.render('productDetail', {product: result});
     })();
 }
