@@ -26,7 +26,9 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="/">307 STORE</a>
+              <a class="navbar-brand"
+                style="font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif"
+                href="/">307 STORE</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -42,7 +44,7 @@
                             <li>
                                 <hr class="dropdown-divider" />
                             </li>
-                            <li><a class="dropdown-item" href="#!">Bộ lọc sản phẩm</a></li>
+                            <li><a class="dropdown-item" href="/filter">Bộ lọc sản phẩm</a></li>
                             <li><a class="dropdown-item" href="#!">Tìm kiếm sản phẩm</a></li>
                         </ul>
                     </li>
@@ -50,15 +52,18 @@
                 <div>
                     {{!-- <button type="button" class="btn btn-dark mb-3">Đăng ký</button>
                     <button type="button" class="btn btn-dark mb-3">Đăng nhập</button> --}}
-                    <a href="/account/signup"><button class="btn btn-outline-success my-2 mb-1" type="submit">Đăng
+                    <a href="/account/signup"><button class="btn btn-outline-success my-2 mb-1 me-2" type="submit">Đăng
                             ký</button></a>
-                    <a href="/account/login"><button class="btn btn-outline-success my-2 mb-1" type="submit">Đăng
+                   <a href="/account/login"><button class="btn btn-outline-primary my-2 mb-1" type="submit">Đăng
                             nhập</button></a>
                     <form class="d-flex">
                         <button class="btn btn-outline-dark" type="submit">
                             <i class="bi-cart-fill me-1"></i>
                             Giỏ hàng hiện tại
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0
+                                <span class="visually-hidden">giỏ hàng hiện tại</span>
+                            </span>
                         </button>
                     </form>
                 </div>
@@ -85,7 +90,8 @@
                         <li class="nav-item mb-2"><a href="/" class="nav-link p-0 text-muted">Trang chủ</a></li>
                     </h5>
                     <h5>
-                        <li class="nav-item mb-2"><a href="/info/aboutus" class="nav-link p-0 text-muted">Về chúng tôi</a></li>
+                         <li class="nav-item mb-2"><a href="/info/aboutus" class="nav-link p-0 text-muted">Về chúng
+                                tôi</a></li>
                     </h5>
                 </ul>
             </div>
@@ -93,12 +99,11 @@
             <div class="col mt-3">
                 <ul class="nav flex-column">
                     <h5>
-                        <li class="nav-item mb-2"><a href="#"
-                                class="nav-link p-0 text-muted">Điều khoản sử dụng</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Điều khoản sử dụng</a>
+                        </li>
                     </h5>
                     <h5>
-                        <li class="nav-item mb-2"><a href="#"
-                                class="nav-link p-0 text-muted">Thông tin pháp lý</a></li>
+                         <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Thông tin pháp lý</a></li>
                     </h5>
                 </ul>
             </div>
