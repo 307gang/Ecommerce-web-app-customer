@@ -1,4 +1,4 @@
-module.exports = async (req) => {
+module.exports = async (req, queryString) => {
     var {sortBy, sortOrder} = req.query;
     var url = req.protocol + '://' + req.get('host') + '/database/products?sortBy=' + sortBy + '&sortOrder=' + sortOrder;
     const response = await fetch(url, {

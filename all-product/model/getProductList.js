@@ -1,5 +1,5 @@
-module.exports = async (req) => {
-    var url = req.protocol + '://' + req.get('host') + '/database/products';
+module.exports = async (req, queryString) => {
+    var url = req.protocol + '://' + req.get('host') + '/database/products?' + queryString;
     const response = await fetch(url, {
         method: 'GET', // *GET, POST, PUT, DELETE, etc.
         headers: {

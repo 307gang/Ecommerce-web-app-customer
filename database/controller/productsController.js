@@ -4,13 +4,28 @@ const dbSort = require('../model/sortProduct');
 module.exports = (req, res) => {
     (async () => {
         var {sortBy, sortOrder} = req.query;
+        const {cat} = req.query;
+        const {p_s, p_e} = req.query
+        const {brd} = req.query;
         if (sortBy){
-            var result = await dbSort(sortBy, sortOrder);
-            res.send({products: result});
+            if (cat || p_s || brd){
+                var result = await dbSort.withFilter(req);
+                res.send({products: result});
+            }
+            else{
+                var result = await dbSort.noFilter(req);
+                res.send({products: result});
+            }
         }
         else{
-            var result = await db();
-            res.send({products: result});
+            if (cat || p_s || brd){
+                var result = await db.withFilter(req);
+                res.send({products: result});
+            }
+            else {
+                var result = await db.noFilter();
+                res.send({products: result});
+            }
         }
     })();
 }

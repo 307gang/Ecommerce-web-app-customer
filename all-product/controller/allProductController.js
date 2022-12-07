@@ -41,7 +41,7 @@
 //   },
 // ];
 
-const getProductsList = require('../model/getProductList');
+const getProductList = require('../model/getProductList');
 const getSortProductList = require('../model/getSortProductList')
 const getCategoryList = require('../model/getCategoryList');
 const getBrandList = require('../model/getBrandList');
@@ -50,46 +50,40 @@ module.exports = (req, res) => {
   (async () => {
     const categoryList = await getCategoryList(req);
     const brandList = await getBrandList(req);
-
+    //get query parameter
     const {cat} = req.query;
     const {p_s, p_e} = req.query
     const {brd} = req.query;
     const {search} = req.query;
     const {sortBy, sortOrder} = req.query;
-
+    //create query state
     var filter_state = ""; var first_fil = false;
     if (cat){
       filter_state = filter_state + `cat=${cat}`;
-      if (!first_fil){
-        first_fil = true;
-        filter_state = filter_state + '&';
-      }
+      first_fil = true;
     }
     if (p_s && p_e){
-      filter_state = filter_state + `p_s=${p_s}&p_e=${p_e}&` ;
-      if (!first_fil){
-        first_fil = true;
+      if (first_fil){
         filter_state = filter_state + '&';
       }
+      filter_state = filter_state + `p_s=${p_s}&p_e=${p_e}` ;
+      first_fil = true;
     }
     if (brd){
-      filter_state = filter_state + `brd=${brd}&`;
-      if (!first_fil){
-        first_fil = true;
+      if (first_fil){
         filter_state = filter_state + '&';
       }
+      filter_state = filter_state + `brd=${brd}`;
     }
-
     var order_state = "";
-    
-    console.log(filter_state);
+
     if (sortBy){
       order_state = `sortBy=${sortBy}&sortOrder=${sortOrder}`;
-      var result = await getSortProductList(req);
+      var result = await getProductList(req, `${filter_state}&${order_state}`);
       res.render("all-product", {product_list: result.products, originalUrl: req.baseUrl, category_list: categoryList.categories, brand_list: brandList.brands, filter_state, order_state});
     }
     else{
-      var result = await getProductsList(req);
+      var result = await getProductList(req, `${filter_state}`);
       res.render("all-product", {product_list: result.products, originalUrl: req.baseUrl, category_list: categoryList.categories, brand_list: brandList.brands, filter_state, order_state});
     }
   })();
