@@ -1,6 +1,5 @@
 module.exports = async (req) => {
-    var {sortBy, sortOrder} = req.query;
-    var url = req.protocol + '://' + req.get('host') + '/database/products?sortBy=' + sortBy + '&sortOrder=' + sortOrder;
+    var url = req.protocol + '://' + req.get('host') + '/database/brands';
     const response = await fetch(url, {
         method: 'GET', // *GET, POST, PUT, DELETE, etc.
         headers: {

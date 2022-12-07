@@ -10,7 +10,6 @@ module.exports = async (req) => {
         referrerPolicy: 'no-referrer' // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
     });
     var result = response.json();
-    console.log(result)
     return result;
 
 }

@@ -11,7 +11,10 @@ const accountRouter = require('./accounts/routes/accountsRoute');
 const productRouter = require('./product/routes/productRoute');
 const infoRouter = require('./information/routes/info');
 const allProductRouter = require('./all-product/routes/index');
-const database = require('./database/route/productsRoute');
+const productDatabase = require('./database/route/productsRoute');
+const categoryDatabase = require('./database/route/categoriesRoute');
+const brandDatabase = require('./database/route/brandsRoute');
+
 const filterRouter = require("./filter/routes/filterRoute");
 
 const app = express();
@@ -43,7 +46,9 @@ app.use('/account', accountRouter);
 app.use('/product', productRouter);
 app.use('/info', infoRouter);
 app.use('/all-product', allProductRouter);
-app.use('/database/products', database);
+app.use('/database/products', productDatabase);
+app.use('/database/categories', categoryDatabase);
+app.use('/database/brands', brandDatabase);
 app.use("/filter", filterRouter);
 
 // catch 404 and forward to error handler
