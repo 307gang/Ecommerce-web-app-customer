@@ -6,19 +6,13 @@ const logger = require("morgan");
 var hbs = require('hbs');
 
 const indexRouter = require("./index/routes/indexRoute");
-<<<<<<< HEAD
-=======
 
->>>>>>> main
 const accountRouter = require('./accounts/routes/accountsRoute');
 const productRouter = require('./product/routes/productRoute');
 const infoRouter = require('./information/routes/info');
 const allProductRouter = require('./all-product/routes/index');
 const database = require('./database/route/productsRoute');
-<<<<<<< HEAD
-=======
 const filterRouter = require("./filter/routes/filterRoute");
->>>>>>> main
 
 const app = express();
 
@@ -50,12 +44,7 @@ app.use('/product', productRouter);
 app.use('/info', infoRouter);
 app.use('/all-product', allProductRouter);
 app.use('/database/products', database);
-<<<<<<< HEAD
-
-=======
 app.use("/filter", filterRouter);
->>>>>>> main
-
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
