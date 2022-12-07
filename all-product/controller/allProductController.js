@@ -50,14 +50,47 @@ module.exports = (req, res) => {
   (async () => {
     const categoryList = await getCategoryList(req);
     const brandList = await getBrandList(req);
-    const {search, sortBy, sortOrder} = req.query;
-    if (sortBy != ""){
+
+    const {cat} = req.query;
+    const {p_s, p_e} = req.query
+    const {brd} = req.query;
+    const {search} = req.query;
+    const {sortBy, sortOrder} = req.query;
+
+    var filter_state = ""; var first_fil = false;
+    if (cat){
+      filter_state = filter_state + `cat=${cat}`;
+      if (!first_fil){
+        first_fil = true;
+        filter_state = filter_state + '&';
+      }
+    }
+    if (p_s && p_e){
+      filter_state = filter_state + `p_s=${p_s}&p_e=${p_e}&` ;
+      if (!first_fil){
+        first_fil = true;
+        filter_state = filter_state + '&';
+      }
+    }
+    if (brd){
+      filter_state = filter_state + `brd=${brd}&`;
+      if (!first_fil){
+        first_fil = true;
+        filter_state = filter_state + '&';
+      }
+    }
+
+    var order_state = "";
+    
+    console.log(filter_state);
+    if (sortBy){
+      order_state = `sortBy=${sortBy}&sortOrder=${sortOrder}`;
       var result = await getSortProductList(req);
-      res.render("all-product", {product_list: result.products, originalUrl: req.baseUrl, category_list: categoryList.categories, brand_list: brandList.brands});
+      res.render("all-product", {product_list: result.products, originalUrl: req.baseUrl, category_list: categoryList.categories, brand_list: brandList.brands, filter_state, order_state});
     }
     else{
       var result = await getProductsList(req);
-      res.render("all-product", {product_list: result.products, originalUrl: req.baseUrl, category_list: categoryList.categories, brand_list: brandList.brands});
+      res.render("all-product", {product_list: result.products, originalUrl: req.baseUrl, category_list: categoryList.categories, brand_list: brandList.brands, filter_state, order_state});
     }
   })();
 };

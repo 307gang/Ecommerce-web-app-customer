@@ -19,41 +19,43 @@
                             Sort by
                         </button>
                         <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
-                            <li><a class="dropdown-item" href="{{originalUrl}}?search=&sortBy=created_date&sortOrder=asc">Mới nhất</a></li>
-                            <li><a class="dropdown-item" href="{{originalUrl}}?search=&sortBy=price&sortOrder=asc">Giá tăng dần</a></li>
-                            <li><a class="dropdown-item" href="{{originalUrl}}?search=&sortBy=price&sortOrder=desc">Giá giảm dần</a></li>
+                            <li><a class="dropdown-item" href="{{originalUrl}}?{{filter_state}}search=&sortBy=created_date&sortOrder=asc">Mới nhất</a></li>
+                            <li><a class="dropdown-item" href="{{originalUrl}}?{{filter_state}}search=&sortBy=price&sortOrder=asc">Giá tăng dần</a></li>
+                            <li><a class="dropdown-item" href="{{originalUrl}}?{{filter_state}}search=&sortBy=price&sortOrder=desc">Giá giảm dần</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
             <!-- Shop Sidebar Start -->
             <div class="col-lg-2 col-md-12" id="filter">
+                <input type="hidden" id="filter-state" value={{filter_state}}>
+                <input type="hidden" id="order-state" value={{order_state}}>
                 <!-- Price Start -->
                 <div class="border-bottom mb-4 pb-4">
                     <h5 class="font-weight-semi-bold mb-4">Lọc theo giá</h5>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" checked id="all-price">
-                        <label class="custom-control-label" for="all-price">Tất cả các giá</label>
+                        <input type="checkbox" class="custom-control-input price-filter" data-value="" checked id="price-all">
+                        <label class="custom-control-label" for="price-all">Tất cả các giá</label>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="price-1">
+                        <input type="checkbox" class="custom-control-input price-filter price-filter" data-value='{"start": 0, "end": 50}' id="price-1">
                         <label class="custom-control-label" for="price-1">0 - 50000 VND</label>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="price-2">
+                        <input type="checkbox" class="custom-control-input price-filter price-filter" data-value='{"start": 50, "end": 100}' id="price-2">
                         <label class="custom-control-label" for="price-2">50000 - 100000 VND</label>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="price-3">
+                        <input type="checkbox" class="custom-control-input price-filter" data-value='{"start": 100, "end": 500}' id="price-3">
                         <label class="custom-control-label" for="price-3">100000 - 500000 VND</label>
 
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="price-4">
+                        <input type="checkbox" class="custom-control-input price-filter" data-value='{"start": 500, "end": 1000}' id="price-4">
                         <label class="custom-control-label" for="price-4">500000 - 1000000 VND</label>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                        <input type="checkbox" class="custom-control-input" id="price-5">
+                        <input type="checkbox" class="custom-control-input price-filter" data-value='{"start": 1000, "end": 5000}' id="price-5">
                         <label class="custom-control-label" for="price-5">1000000 - 5000000 VND</label>
                     </div>
                 </div>
@@ -63,12 +65,12 @@
                 <div class="border-bottom mb-4 pb-4">
                     <h5 class="font-weight-semi-bold mb-4">Lọc theo loại sản phẩm</h5>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" checked id="all-cat">
-                        <label class="custom-control-label" for="all-cat">Tất cả sản phẩm</label>
+                        <input type="checkbox" class="custom-control-input cat-filter" value = "" checked id="cat-all">
+                        <label class="custom-control-label" for="cat-all">Tất cả sản phẩm</label>
                     </div>
                     {{#each category_list}}
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="cat-{{category_id}}">
+                        <input type="checkbox" class="custom-control-input cat-filter" value="{{category_id}}" id="cat-{{category_id}}">
                         <label class="custom-control-label" for="cat-{{category_id}}">{{category_name}}</label>
                     </div>
                     {{/each}}
@@ -79,12 +81,12 @@
                 <div class="mb-5">
                     <h5 class="font-weight-semi-bold mb-4">Lọc theo hãng sản xuất</h5>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" checked id="all-brand">
-                        <label class="custom-control-label" for="all-brand">Tất cả các hãng</label>
+                        <input type="checkbox" class="custom-control-input brand-filter" value="" checked id="brand-all">
+                        <label class="custom-control-label" for="brand-all">Tất cả các hãng</label>
                     </div>
                     {{#each brand_list}}
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="brand-{{brand_id}}">
+                        <input type="checkbox" class="custom-control-input brand-filter" value="{{brand_id}}" id="brand-{{brand_id}}">
                         <label class="custom-control-label" for="brand-{{brand_id}}">{{brand_name}}</label>
                     </div>
                     {{/each}}
