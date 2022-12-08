@@ -1,14 +1,6 @@
-module.exports = async (req, id) => {
-    var url = req.protocol + '://' + req.get('host') + '/database/categories/' + id;
-    const response = await fetch(url, {
-        method: 'GET', // *GET, POST, PUT, DELETE, etc.
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        redirect: 'follow', // manual, *follow, error
-        referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-    });
-    var result = response.json();
-    return result;
+const db = require('../../database/model/getSameCategory');
+
+module.exports = async (req) => {
+  var result = await db(req.params.id);    
+  return result;
 }
