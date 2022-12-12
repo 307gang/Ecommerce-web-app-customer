@@ -1,10 +1,9 @@
 <body>
-
     <div class="container">
         <div class="row">
             <div class="col-md-6 offset-md-3">
                 <div class="signup-form">
-                    <form action="" class="mt-5 p-5 bg-light shadow">
+                    <form method="post" class="mt-5 p-5 bg-light shadow">
 
                         <h3 class="mb-4 text-secondary">Tạo một tài khoản mới</h3>
 
@@ -14,43 +13,47 @@
                 </div> -->
                         <div class="mb-3 col-md-12">
                             <label>Họ tên<span class="text-danger">*</span></label>
-                            <input type="email" class="form-control" id="MyEmail">
+                            <input type="text" name="full-name" class="form-control" id="MyName">
                         </div>
                         <div class="mb-3 col-md-12">
                             <label>Số điện thoại</label>
-                            <input type="email" class="form-control" id="MyEmail">
+                            <input type="text" name="" class="form-control" id="MyNumber">
                         </div>
                         <div class="mb-3 col-md-12">
                             <label>Địa chỉ</label>
-                            <input type="email" class="form-control" id="MyEmail">
+                            <input type="text" class="form-control" id="MyAddress">
                         </div>
                         <div class="mb-3 col-md-12">
-                            <label>Email<span class="text-danger">*</span></label>
-                            <input type="email" class="form-control" id="MyEmail">
+                            <label>Tài khoản<span class="text-danger">*</span></label>
+                            <input type="text" name="username" class="form-control" id="MyAccount">
                         </div>
                         <div class="mb-3 col-md-12">
                             <label>Mật khẩu<span class="text-danger">*</span></label>
-                            <input type="password" class="form-control" id="MyPassword">
+                            <input type="password" name="password" class="form-control" id="MyPassword">
                         </div>
                         <!-- <div class="mb-3 col-md-12">
-                  <label>Phone<span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" id="" placeholder="Enter your Phone">
-                </div> -->
-                        <div id="errornotif" style="color:red; text-align:center;  display:none;">Email đã được sử dụng!
+                            <label>Phone<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="" placeholder="Enter your Phone">
+                            </div> -->
+                        {{#if error}}
+                        <div id="errornotif" style="color:red; text-align:center;  display:none;" class="error">
+                            {{error}}
                         </div>
+                        {{/if}}
 
                         <div class="col-md-12">
                             <button class="btn btn-primary float-end" id="submitSignUpInfo">Đăng ký</button>
                         </div>
                     </form>
 
-                    <p class="text-center mt-3 text-secondary">Bạn đã tạo tài khoản?, <a href="/account/login">Đăng nhập tại đây!</a>
+                    <p class="text-center mt-3 text-secondary">Bạn đã tạo tài khoản?, <a href="/account/login">Đăng nhập
+                            tại đây!</a>
                     </p>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <!-- Core theme JS-->
     <script src="../../public/js/scripts.js"></script>
 </body>

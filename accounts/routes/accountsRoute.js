@@ -6,6 +6,7 @@ var register = require('../controller/registerController');
 
 router.get("/login", login);
 
-router.get("/signup", register);
+router.get("/register", register.registerStep);
+router.post("/register", register.register);
 
 module.exports = router;
