@@ -3,17 +3,19 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
-var hbs = require('hbs');
+var hbs = require("hbs");
+var session = require("express-session");
 
 const indexRouter = require("./index/routes/indexRoute");
 
-const accountRouter = require('./accounts/routes/accountsRoute');
-const productRouter = require('./product/routes/productRoute');
-const infoRouter = require('./information/routes/info');
-const allProductRouter = require('./all-product/routes/index');
-const productDatabase = require('./database/route/productsRoute');
-const categoryDatabase = require('./database/route/categoriesRoute');
-const brandDatabase = require('./database/route/brandsRoute');
+const accountRouter = require("./accounts/routes/accountsRoute");
+const productRouter = require("./product/routes/productRoute");
+const infoRouter = require("./information/routes/info");
+const allProductRouter = require("./all-product/routes/index");
+const productDatabase = require("./database/route/productsRoute");
+const categoryDatabase = require("./database/route/categoriesRoute");
+const brandDatabase = require("./database/route/brandsRoute");
+const passport = require("./accounts/model/authenticatePassport");
 
 const app = express();
 
@@ -27,7 +29,9 @@ var views = [
   "./all-product/view",
 ];
 
-hbs.registerHelper('multiply', function (a, b) { return a * b; });
+hbs.registerHelper("multiply", function (a, b) {
+  return a * b;
+});
 
 app.set("views", views);
 app.set("view engine", "hbs");
@@ -37,15 +41,27 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static("./public"));
+app.use(
+  session({
+    secret: "secret",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+app.use(passport.authenticate("session"));
+app.use(function (req, res, next) {
+  res.locals.user = req.user;
+  next();
+});
 
 app.use("/", indexRouter);
-app.use('/account', accountRouter);
-app.use('/product', productRouter);
-app.use('/info', infoRouter);
-app.use('/all-product', allProductRouter);
-app.use('/database/products', productDatabase);
-app.use('/database/categories', categoryDatabase);
-app.use('/database/brands', brandDatabase);
+app.use("/account", accountRouter);
+app.use("/product", productRouter);
+app.use("/info", infoRouter);
+app.use("/all-product", allProductRouter);
+app.use("/database/products", productDatabase);
+app.use("/database/categories", categoryDatabase);
+app.use("/database/brands", brandDatabase);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

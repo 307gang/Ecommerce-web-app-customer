@@ -10,3 +10,11 @@ exports.register = async (fullname, username, password) => {
   const id = authenDB.addUser(fullname, username, hashedPassword);
   return id;
 };
+
+exports.checkUserCredentials = async (username, password) => {
+  const user = await authenDB.getUserByUsername(username);
+  if (!user) return null;
+  const match = await bcrypt.compare(password, user.password);
+  if (!match) return null;
+  return user;
+}

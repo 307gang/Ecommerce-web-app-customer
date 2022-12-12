@@ -3,24 +3,29 @@
     <div class="row">
       <div class="col-md-6 offset-md-3">
         <div class="signup-form">
-          <form action="" class="mt-5 p-5 bg-light shadow">
+          <form method="post" class="mt-5 p-5 bg-light shadow">
 
             <h3 class="mb-4 text-secondary">Đăng nhập vào tài khoản của bạn</h3>
 
             <div class="mb-3 col-md-12">
-              <label>Email<span class="text-danger">*</span></label>
-              <input type="email" class="form-control" id="MyEmail">
+              <label>Tài khoản<span class="text-danger">*</span></label>
+              <input type="text" name="username" class="form-control" id="MyAccount">
             </div>
             <div class="mb-3 col-md-12">
               <label>Mật khẩu<span class="text-danger">*</span></label>
-              <input type="password" class="form-control" id="MyPassword">
-
+              <input type="password" name="password" class="form-control" id="MyPassword">
             </div>
 
             <div class="col">
               <!-- Simple link -->
               <a href="#!">Quên mật khẩu?</a>
             </div>
+
+            {{#if error}}
+            <div class="error">
+              {{error}}
+            </div>
+            {{/if}}
 
             <div class="col-md-12 mb-4">
               <button class="btn btn-primary float-end" id="submitLoginInfo">Đăng nhập</button>
