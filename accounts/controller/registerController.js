@@ -33,6 +33,6 @@ exports.register = async (req, res) => {
     res.render("account/register", { error: e.message });
     return;
   }
-  // res.redirect("/");
+  res.redirect("/");
 };
 
