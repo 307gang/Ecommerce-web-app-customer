@@ -1,3 +1,3 @@
 exports.loginStep = (req, res) => {
-    res.render("login");
-  };
+  res.render("login");
+};

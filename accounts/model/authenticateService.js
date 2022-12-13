@@ -17,4 +17,4 @@ exports.checkUserCredentials = async (username, password) => {
   const match = await bcrypt.compare(password, user.password);
   if (!match) return null;
   return user;
-}
+};
