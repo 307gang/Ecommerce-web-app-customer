@@ -7,16 +7,16 @@
 
             <h3 class="mb-4 text-secondary">Đăng nhập vào tài khoản của bạn</h3>
 
-            <div class="mb-3 col-md-12">
-              <label>Tài khoản<span class="text-danger">*</span></label>
-              <input type="text" name="username" class="form-control" id="MyAccount">
+            <div class="form-floating mb-3 col-md-12">
+              <input type="text" name="username" class="form-control" id="MyAccount" placeholder="name@example.com">
+              <label for="MyAccount">Tài khoản<span class="text-danger">*</span></label>
             </div>
-            <div class="mb-3 col-md-12">
-              <label>Mật khẩu<span class="text-danger">*</span></label>
-              <input type="password" name="password" class="form-control" id="MyPassword">
+            <div class="form-floating col-md-12">
+              <input type="password" name="password" class="form-control" id="MyPassword" placeholder="Password">
+              <label for="MyPassword">Mật khẩu<span class="text-danger">*</span></label>
             </div>
 
-            <div class="col">
+            <div class="mt-2">
               <!-- Simple link -->
               <a href="#!">Quên mật khẩu?</a>
             </div>
@@ -27,12 +27,31 @@
             </div>
             {{/if}}
 
-            <div class="col-md-12 mb-4">
-              <button class="btn btn-primary float-end" id="submitLoginInfo">Đăng nhập</button>
+            {{!-- login button --}}
+            <div class="col-md-12 mt-2 mb-4">
+              <button type="button" class="btn btn-primary float-end" id="submitLoginInfo" data-bs-toggle="modal"
+                data-bs-target="#LogInModal">Đăng nhập</button>
+            </div>
+            {{!-- modal --}}
+            <div class="modal fade" id="LogInModal" aria-labelledby="LogInModalLabel" aria-hidden="true" tabindex="-1">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Thông báo</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <p>Bạn đã đăng nhập thành công.</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </form>
 
-          <p class="text-center mt-3 text-secondary">Bạn chưa có tài khoản? <a href="/account/signup">Đăng ký tại
+          <p class="text-center mt-3 text-secondary">Bạn chưa có tài khoản? <a href="/account/register">Đăng ký tại
               đây</a></p>
         </div>
       </div>

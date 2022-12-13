@@ -20,17 +20,17 @@ exports.usernameExists = async (username) => {
   return result[0].length > 0;
 };
 
-exports.addUser = async (username, password, fullname) => {
+exports.addUser = async (username, password, fullname, phone, address) => {
   var id = await generateUUID();
 
   await db.connection.execute(
-    "insert into `users` (uuid, username, password, admin) values (?, ?, ?, 0)",
+    "insert into `users` (uuid, username, password, admin) values (?, ?, ?, 1)",
     [id, username, password]
   );
 
   await db.connection.execute(
-    "insert into customers (uuid, full_name) values (?, ?)",
-    [id, fullname]
+    "insert into customers (uuid, full_name, phone_number, address) values (?, ?, ?, ?)",
+    [id, fullname, phone, address]
   );
 
   return id;
