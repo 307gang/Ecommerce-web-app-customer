@@ -43,7 +43,7 @@
                     {{!-- <button type="button" class="btn btn-dark mb-3">Đăng ký</button>
                     <button type="button" class="btn btn-dark mb-3">Đăng nhập</button> --}}
                     {{#if user}}
-                    <div>Hello, {{user.username}}!, <a href="/account/logout">Đăng xuất</a></div>
+                    <div>Hello, {{user.fullname}}! <a class="btn btn-danger" type="submit" href="/account/logout">Đăng xuất</a></div>
                     {{else}}
                     <a href="/account/register"><button class="btn btn-outline-success my-2 mb-1 me-2" type="submit">Đăng ký</button></a>
                     <a href="/account/login"><button class="btn btn-outline-primary my-2 mb-1" type="submit">Đăng nhập</button></a>
