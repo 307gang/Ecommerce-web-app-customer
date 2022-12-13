@@ -24,7 +24,7 @@ exports.addUser = async (username, password, fullname) => {
   var id = await generateUUID();
 
   await db.connection.execute(
-    "insert into `users` (uuid, username, password, admin) values (?, ?, ?, 0)",
+    "insert into `users` (uuid, username, password, admin) values (?, ?, ?, 1)",
     [id, username, password]
   );
 
