@@ -12,13 +12,11 @@ exports.registerStep = (req, res) => {
 };
 
 exports.register = async (req, res) => {
-  console.log(req.body);
   if (!ajv.validate(registerSchema, req.body)) {
     res.render("register", { error: "Invalid input" });
     return;
   }
   const { "full-name": fullname, phone, address, username, password } = req.body;
-  console.log(req.body);
   try {
     await authenModel.register(username, password, fullname, phone, address);
   } catch (e) {
