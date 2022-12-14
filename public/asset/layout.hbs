@@ -45,23 +45,26 @@
                     {{#if user}}
 
                     <div class="dropdown ml-4">
-                        Hello!!! 
+                        Xin chào
                         <button class="btn border dropdown-toggle" type="button" id="triggerId"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false">
+                            data-bs-toggle="dropdown" aria-expanded="false">
                             {{user.username}}
                         </button>
                         <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
                             <li><a class="dropdown-item" href="/account/info">Thông tin cá nhân</a></li>
                             <li><a class="dropdown-item" href="#">Cài đặt</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#" style="color:red">Đăng xuất</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="/account/logout" style="color:red">Đăng xuất</a></li>
                         </ul>
                     </div>
 
                     {{else}}
-                    <a href="/account/register"><button class="btn btn-outline-success my-2 mb-1 me-2" type="submit">Đăng ký</button></a>
-                    <a href="/account/login"><button class="btn btn-outline-primary my-2 mb-1" type="submit">Đăng nhập</button></a>
+                    <a href="/account/register"><button class="btn btn-outline-success my-2 mb-1 me-2"
+                            type="submit">Đăng ký</button></a>
+                    <a href="/account/login"><button class="btn btn-outline-primary my-2 mb-1" type="submit">Đăng
+                            nhập</button></a>
                     {{/if}}
 
                     <form class="d-flex">

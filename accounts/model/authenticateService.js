@@ -7,7 +7,13 @@ exports.register = async (username, password, fullname, phone, address) => {
   }
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
-  const id = authenDB.addUser(username, hashedPassword, fullname, phone, address);
+  const id = authenDB.addUser(
+    username,
+    hashedPassword,
+    fullname,
+    phone,
+    address
+  );
   return id;
 };
 

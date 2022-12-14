@@ -9,25 +9,30 @@
 
                         <div class="form-floating mb-3 col-md-12">
                             <input type="text" name="full-name" class="form-control" id="MyName" placeholder="Thịnh">
+                            <span id="MyName"></span>
                             <label for="MyName">Họ tên<span class="text-danger">*</span></label>
                         </div>
                         <div class="form-floating mb-3 col-md-12">
                             <input type="text" name="phone" class="form-control" id="MyNumber" placeholder="0123456789">
+                            <span id="MyNumber"></span>
                             <label for="MyNumber">Số điện thoại</label>
                         </div>
                         <div class="form-floating mb-3 col-md-12">
                             <input type="text" name="address" class="form-control" id="MyAddress"
                                 placeholder="227 Nguyễn Văn Cừ">
+                            <span id="MyAddress"></span>
                             <label for="MyAddress">Địa chỉ</label>
                         </div>
                         <div class="form-floating mb-3 col-md-12">
                             <input type="text" name="username" class="form-control" id="MyAccount"
                                 placeholder="thinh123">
+                            <span id="MyAccount"></span>
                             <label for="MyAccount">Tài khoản<span class="text-danger">*</span></label>
                         </div>
                         <div class="form-floating col-md-12">
                             <input type="password" name="password" class="form-control" id="MyPassword"
                                 placeholder="123">
+                            <span id="MyPassword"></span>
                             <label for="MyPassword">Mật khẩu<span class="text-danger">*</span></label>
                         </div>
 
@@ -39,9 +44,9 @@
 
                         <div class="col-md-12 mt-3 mb-4">
                             <button type="button submit" class="btn btn-primary float-end" id="submitLoginInfo"
-                                 data-bs-toggle="modal" data-bs-target="#SignUpModal">Đăng ký</button>
+                                data-bs-toggle="modal" data-bs-target="#SignUpModal">Đăng ký</button>
                         </div>
-                        
+
                         {{!-- modal --}}
                         <div class="modal fade" id="SignUpModal" aria-labelledby="SignUpModalLabel" aria-hidden="true"
                             tabindex="-1">

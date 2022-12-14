@@ -11,7 +11,7 @@ passport.use(
     const user = await authenService.checkUserCredentials(username, password);
     console.log(user);
     if (user) return cb(null, user);
-    return cb(null, false); 
+    return cb(null, false);
   })
 );
 
