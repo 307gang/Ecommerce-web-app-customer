@@ -16,7 +16,8 @@
                             <label for="MyNumber">Số điện thoại</label>
                         </div>
                         <div class="form-floating mb-3 col-md-12">
-                            <input type="text" name="address" class="form-control" id="MyAddress" placeholder="227 Nguyễn Văn Cừ">
+                            <input type="text" name="address" class="form-control" id="MyAddress"
+                                placeholder="227 Nguyễn Văn Cừ">
                             <label for="MyAddress">Địa chỉ</label>
                         </div>
                         <div class="form-floating mb-3 col-md-12">
@@ -38,10 +39,11 @@
 
                         <div class="col-md-12 mt-3 mb-4">
                             <button type="button submit" class="btn btn-primary float-end" id="submitLoginInfo"
-                                >Đăng ký</button>
+                                 data-bs-toggle="modal" data-bs-target="#SignUpModal">Đăng ký</button>
                         </div>
+                        
                         {{!-- modal --}}
-                        {{!-- <div class="modal fade" id="SignUpModal" aria-labelledby="SignUpModalLabel" aria-hidden="true"
+                        <div class="modal fade" id="SignUpModal" aria-labelledby="SignUpModalLabel" aria-hidden="true"
                             tabindex="-1">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
@@ -51,18 +53,20 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <p>Bạn đã đăng ký thành công. Vui lòng đăng nhập <a href="/account/login" data-bs-toggle="tooltip" title="Đăng nhập">TẠI ĐÂY</a></p>
+                                        <p>Bạn đã đăng ký thành công. Vui lòng đăng nhập <a href="/account/login"
+                                                data-bs-toggle="tooltip" title="Đăng nhập">TẠI ĐÂY</a></p>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-outline-primary"
+                                        <button type="submit" class="btn btn-outline-primary"
                                             data-bs-dismiss="modal">Close</button>
                                     </div>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
                     </form>
 
-                    <p class="text-center mt-3 text-secondary">Bạn đã tạo tài khoản? <a href="/account/login">Đăng nhập
+                    <p class="text-center mt-3 text-secondary">Bạn đã tạo tài khoản? <a href="/account/login"
+                            class="text-decoration-none">Đăng nhập
                             tại đây!</a>
                     </p>
                 </div>

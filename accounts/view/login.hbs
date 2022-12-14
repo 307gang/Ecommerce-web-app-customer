@@ -18,7 +18,7 @@
 
             <div class="mt-2">
               <!-- Simple link -->
-              <a href="#!">Quên mật khẩu?</a>
+              <a href="#!" class="text-decoration-none">Quên mật khẩu?</a>
             </div>
 
             {{#if error}}
@@ -38,23 +38,25 @@
                 <div class="modal-content">
                   <div class="modal-header">
                     <h4 class="modal-title">Thông báo</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="submit" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
                     <p>Bạn đã đăng nhập thành công.</p>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
                   </div>
                 </div>
               </div>
             </div>
           </form> --}}
 
-          <p class="text-center mt-3 text-secondary">Bạn chưa có tài khoản? <a href="/account/register">Đăng ký tại
+          <p class="text-center mt-3 text-secondary">Bạn chưa có tài khoản? <a href="/account/register" class="text-decoration-none">Đăng ký tại
               đây</a></p>
         </div>
       </div>
     </div>
   </div>
+  <!-- Core theme JS-->
+    <script src="../../public/js/scripts.js"></script>
 </body>
