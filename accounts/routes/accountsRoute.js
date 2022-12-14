@@ -21,5 +21,6 @@ router.post(
 router.get("/logout", register.logout);
 
 router.get("/info", profile.profileStep);
+router.post("/info", profile.profileUpdate);
 
 module.exports = router;

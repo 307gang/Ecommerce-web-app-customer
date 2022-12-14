@@ -1,14 +1,9 @@
 const db = require('./database')
 
-exports.updateUser = async (id, password, email, fullname, phone, address) => {
-    await db.connection.execute(
-        "update users set password = ? where uuid = ?",
-        [password, id]
-      );
-    
+exports.updateUser = async (id, fullname, phone, email, address) => {
     await db.connection.execute(
         "update customers set full_name = ?, phone_number = ?, email = ?, address = ? where uuid = ?",
-        [fullname, email, phone, address, id]
+        [fullname, phone, email, address, id]
     );
 }
 
