@@ -43,7 +43,7 @@
                         {{/if}}
 
                         <div class="col-md-12 mt-3 mb-4">
-                            <button type="button submit" class="btn btn-primary float-end" id="submitLoginInfo"
+                            <button type="button" class="btn btn-success float-end" id="submitLoginInfo"
                                 data-bs-toggle="modal" data-bs-target="#SignUpModal">Đăng ký</button>
                         </div>
 
@@ -54,16 +54,16 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h4 class="modal-title">Thông báo</h4>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        <button type="submit" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <p>Bạn đã đăng ký thành công. Vui lòng đăng nhập <a href="/account/login"
-                                                data-bs-toggle="tooltip" title="Đăng nhập">TẠI ĐÂY</a></p>
+                                        <p>Bạn đã đăng ký thành công.</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-outline-primary"
-                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-outline-secondary"
+                                            data-bs-dismiss="modal">Đóng</button>
+                                        <a type="submit" class="btn btn-outline-primary" href="/account/login" role="button">Đăng nhập</a>
                                     </div>
                                 </div>
                             </div>
