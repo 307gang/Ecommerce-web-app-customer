@@ -1,0 +1,55 @@
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <div class="profile-form">
+          <form method="post" class="mt-5 p-5 bg-light shadow">
+    
+            <h3 class="mb-4 text-secondary">Trang Cá nhân</h3>
+
+            <div class="mb-3 col-md-12">
+              <label>Tài khoản:</label>
+              {{user.username}}
+            </div>
+            <!--avt?? -->
+
+            <div class="mb-3 col-md-12">
+              <label>Họ và Tên<span class="text-secondary"></span></label>
+              <span id="MyName"></span>
+              <input type="Name" name="full-name" class="form-control" id="MyName" value="{{userinfo.full_name}}">
+
+            </div>
+
+            <div class="mb-3 col-md-12">
+              <label>Số điện thoại<span class="text-secondary"></span></label>
+              <span id="MyNumber"></span>
+              <input type="Number" name="phone" class="form-control"  value="{{userinfo.phone_number}}" id="MyNumber" >
+
+            </div>
+
+            <div class="mb-3 col-md-12">
+              <label>Email<span class="text-secondary"></span></label>
+              <span id="MyEmail"></span>
+              <input type="Email" name="email" class="form-control" id="MyEmail" value="{{userinfo.email}}">
+
+            </div>
+
+            <div class="mb-3 col-md-12">
+              <label>Địa Chỉ<span class="text-secondary"></span></label>
+              <span  id="MyAddress"></span>
+              <input type="Address" name="address" class="form-control" id="MyAddress" value="{{userinfo.address}}">
+            </div>
+            <div class="mb-3 col-md-12">
+               <button type ="submit" class="btn btn-primary float-end" id="commitInfo">Cập nhật</button>
+
+            </div>
+
+          </form>
+
+         
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+   

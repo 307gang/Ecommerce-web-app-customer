@@ -9,14 +9,15 @@ passport.use(
     cb
   ) {
     const user = await authenService.checkUserCredentials(username, password);
+    console.log(user);
     if (user) return cb(null, user);
-    return cb(null, false);
+    return cb(null, false); 
   })
 );
 
 passport.serializeUser(function (user, cb) {
   process.nextTick(function () {
-    cb(null, { id: user.id, name: user.name, email: user.email });
+    cb(null, { id: user.uuid, username: user.username });
   });
 });
 

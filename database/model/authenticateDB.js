@@ -24,7 +24,7 @@ exports.addUser = async (username, password, fullname, phone, address) => {
   var id = await generateUUID();
 
   await db.connection.execute(
-    "insert into `users` (uuid, username, password, admin) values (?, ?, ?, 1)",
+    "insert into `users` (uuid, username, password, admin) values (?, ?, ?, false)",
     [id, username, password]
   );
 
@@ -40,6 +40,7 @@ exports.getUserByUsername = async (username) => {
   const result = await db.connection.execute(
     "select * from `users` where `username` = ? limit 1",
     [username]
-  );
-  return result[0] && result[0][0];
+  );  
+  return result[0][0];
+
 };
