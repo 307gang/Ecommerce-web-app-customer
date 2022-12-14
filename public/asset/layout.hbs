@@ -44,7 +44,7 @@
                     <button type="button" class="btn btn-dark mb-3">Đăng nhập</button> --}}
                     {{#if user}}
 
-                    <div class="dropdown ml-4">
+                    <div class="dropdown my-2 mb-1 me-2">
                         Xin chào
                         <button class="btn border dropdown-toggle" type="button" id="triggerId"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -56,29 +56,54 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="/account/logout" style="color:red">Đăng xuất</a></li>
-                        </ul>
+                            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#Logout" href="#" style="color:red">Đăng xuất</a></li>
+                        </ul>        
                     </div>
-
-                    {{else}}
-                    <a href="/account/register"><button class="btn btn-outline-success my-2 mb-1 me-2"
-                            type="submit">Đăng ký</button></a>
-                    <a href="/account/login"><button class="btn btn-outline-primary my-2 mb-1" type="submit">Đăng
-                            nhập</button></a>
-                    {{/if}}
-
-                    <form class="d-flex">
-                        <button class="btn btn-warning position-relative mt-2" type="submit" style="width: 200px">
-                            <i class="bi-cart-fill me-1"></i>
-                            Giỏ hàng hiện tại
-                            <span
-                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0
-                                <span class="visually-hidden">giỏ hàng hiện tại</span>
-                            </span>
-                        </button>
-                    </form>
                 </div>
+
+                {{!-- modal --}}
+                <div class="modal fade" id="Logout" aria-labelledby="LogoutModalLabel" aria-hidden="true"
+                    tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Thông báo</h4>
+                                <button type="submit" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Bạn có chắc chắn đăng xuất không?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="/"><button type="submit" class="btn btn-danger">Không</button></a>
+                                <a href="/account/logout"><button type="submit" class="btn btn-success">Có</button></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                {{else}}
+                <a href="/account/register"><button class="btn btn-outline-success my-2 mb-1 me-2" type="submit">Đăng
+                        ký</button></a>
+                <a href="/account/login"><button class="btn btn-outline-primary my-2 mb-1" type="submit">Đăng
+                        nhập</button></a>
+                {{/if}}
+
+                <div>
+                    <form class="d-flex">
+                    <button class="btn btn-warning position-relative mt-1" type="submit" style="width: 200px">
+                        <i class="bi-cart-fill me-1"></i>
+                        Giỏ hàng hiện tại
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0
+                            <span class="visually-hidden">giỏ hàng hiện tại</span>
+                        </span>
+                    </button>
+                </form>
+                </div>
+                
             </div>
+        </div>
         </div>
     </nav>
     {{!-- Nav bar end --}}
