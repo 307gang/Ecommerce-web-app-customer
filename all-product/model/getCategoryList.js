@@ -1,6 +1,6 @@
-const db = require('../../database/model/getAllCategory');
+const db = require('../../database/model/category');
 
 module.exports = async (req) => {
-    var result = await db();    
+    var result = await db.getAllCategory();    
     return result;
 }

@@ -1,24 +1,19 @@
 const bcrypt = require("bcryptjs");
-const authenDB = require("../../database/model/authenticateDB");
+const db = require('../../postgresdb/model/user')
 
 exports.register = async (username, password, fullname, phone, address) => {
-  if (await authenDB.usernameExists(username)) {
+  if (await db.userExists(username)) {
     throw new Error("Username already exists");
   }
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
-  const id = authenDB.addUser(
-    username,
-    hashedPassword,
-    fullname,
-    phone,
-    address
-  );
+  const id = await db.addUser(username, hashedPassword, fullname, phone, address);
+  console.log(id)
   return id;
 };
 
 exports.checkUserCredentials = async (username, password) => {
-  const user = await authenDB.getUserByUsername(username);
+  const user = await db.getUserByUsername(username);
   if (!user) return null;
   const match = await bcrypt.compare(password, user.password);
   if (!match) return null;

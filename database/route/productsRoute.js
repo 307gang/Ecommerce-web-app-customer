@@ -1,11 +1,10 @@
 var express = require("express");
 var router = express.Router();
 
-var all = require('../controller/productsController');  
-var byID = require('../controller/productByIdController');
+var controller = require('../controller/productController');
 
 
-router.get('', all);
-router.get('/:id', byID);
+router.get('', controller.getAllProduct);
+router.get('/:id', controller.getProductById);
 
 module.exports = router;

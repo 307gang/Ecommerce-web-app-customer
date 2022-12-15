@@ -1,5 +1,5 @@
-const dbSort = require('../../database/model/sortProduct');
-const db = require('../../database/model/getAllProduct');
+
+const db = require('../../database/model/product');
 
 module.exports = async (req) => {
     //===================== OLD CODE (MAY USE FOR AJAX) ====================================
@@ -22,24 +22,24 @@ module.exports = async (req) => {
     const {brd} = req.query;
     if (sortBy){
         if (cat || p_s || brd){
-            var result = await dbSort.withFilter(req);
+            var result = await db.getAllProductSortedWithFilter(req);
             // res.send({products: result});
             return result;
         }
         else{
-            var result = await dbSort.noFilter(req);
+            var result = await db.getAllProductSorted(req);
             //res.send({products: result});
             return result;
         }
     }
     else{
         if (cat || p_s || brd){
-            var result = await db.withFilter(req);
+            var result = await db.getAllProductWithFilter(req);
             // res.send({products: result});
             return result;
         }
         else {
-            var result = await db.noFilter();
+            var result = await db.getAllProduct();
             // res.send({products: result});
             return result;
         }
