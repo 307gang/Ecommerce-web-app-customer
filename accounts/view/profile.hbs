@@ -2,54 +2,52 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6 offset-md-3">
-        <div class="profile-form">
+        <div class="profile-form mb-5">
           <form method="post" class="mt-5 p-5 bg-light shadow">
-    
-            <h3 class="mb-4 text-secondary">Trang Cá nhân</h3>
 
-            <div class="mb-3 col-md-12">
-              <label>Tài khoản:</label>
-              {{user.username}}
+            <h3 class="mb-4 text-secondary">Trang cá nhân</h3>
+
+            <div class="mb-3 col-md-12 form-floating">
+              <input type="text" name="" class="form-control" id="MyUsername" value="{{user.username}}"
+                placeholder="abcd" disabled readonly>
+              <span id="MyUsername"></span>
+              <label for="MyUsername">Tài khoản</label>
             </div>
-            <!--avt?? -->
 
-            <div class="mb-3 col-md-12">
-              <label>Họ và Tên<span class="text-secondary"></span></label>
+            <div class="mb-3 col-md-12 form-floating">
+              <input type="text" name="full-name" class="form-control" id="MyName" value="{{userinfo.full_name}}"
+                placeholder="thinh">
               <span id="MyName"></span>
-              <input type="Name" name="full-name" class="form-control" id="MyName" value="{{userinfo.full_name}}">
-
+              <label for="MyName">Họ và Tên<span class="text-secondary"></span></label>
             </div>
 
-            <div class="mb-3 col-md-12">
-              <label>Số điện thoại<span class="text-secondary"></span></label>
+            <div class="mb-3 col-md-12 form-floating">
+              <input type="text" name="phone" class="form-control" id="MyNumber" value="{{userinfo.phone_number}}"
+                placeholder="01234">
               <span id="MyNumber"></span>
-              <input type="Number" name="phone" class="form-control"  value="{{userinfo.phone_number}}" id="MyNumber" >
-
+              <label for="MyNumber">Số điện thoại<span class="text-secondary"></span></label>
             </div>
 
-            <div class="mb-3 col-md-12">
-              <label>Email<span class="text-secondary"></span></label>
+            <div class="mb-3 col-md-12 form-floating">
+              <input type="email" name="email" class="form-control" id="MyEmail" value="{{userinfo.email}}"
+                placeholder="abc@gmail.com">
               <span id="MyEmail"></span>
-              <input type="Email" name="email" class="form-control" id="MyEmail" value="{{userinfo.email}}">
-
+              <label for="MyEmail">Email<span class="text-secondary"></span></label>
             </div>
 
-            <div class="mb-3 col-md-12">
-              <label>Địa Chỉ<span class="text-secondary"></span></label>
-              <span  id="MyAddress"></span>
-              <input type="Address" name="address" class="form-control" id="MyAddress" value="{{userinfo.address}}">
-            </div>
-            <div class="mb-3 col-md-12">
-               <button type ="submit" class="btn btn-primary float-end" id="commitInfo">Cập nhật</button>
-
+            <div class="mb-4 col-md-12 form-floating">
+              <input type="text" name="address" class="form-control" id="MyAddress" value="{{userinfo.address}}"
+                placeholder="123 ABC">
+              <span id="MyAddress"></span>
+              <label for="MyAddress">Địa Chỉ<span class="text-secondary"></span></label>
             </div>
 
+            <div class="mb-5 col-md-12">
+              <button type="submit" class="btn btn-primary float-end" id="commitInfo">Cập nhật</button>
+            </div>
           </form>
-
-         
         </div>
       </div>
     </div>
   </div>
 </body>
-   

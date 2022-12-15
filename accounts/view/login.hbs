@@ -3,16 +3,18 @@
     <div class="row">
       <div class="col-md-6 offset-md-3">
         <div class="signup-form">
-          <form method="post" class="mt-5 p-5 bg-light shadow">
+          <form method="post" class="mt-5 p-5 bg-light shadow needs-validation">
 
-            <h3 class="mb-4 text-secondary">Đăng nhập vào tài khoản của bạn</h3>
+            <h1 class="mb-4 text-secondary">Đăng nhập vào tài khoản của bạn</h1>
 
             <div class="form-floating mb-3 col-md-12">
               <input type="text" name="username" class="form-control" id="MyAccount" placeholder="name@example.com">
+              <span id="MyAccount"></span>
               <label for="MyAccount">Tài khoản<span class="text-danger">*</span></label>
             </div>
             <div class="form-floating col-md-12">
               <input type="password" name="password" class="form-control" id="MyPassword" placeholder="Password">
+              <span id="MyPassword"></span>
               <label for="MyPassword">Mật khẩu<span class="text-danger">*</span></label>
             </div>
 
@@ -29,10 +31,10 @@
 
             {{!-- login button --}}
             <div class="col-md-12 mt-2 mb-4">
-              <button type="button submit" class="btn btn-primary float-end" id="submitLoginInfo" data-bs-toggle="modal"
+              <button type="button" class="btn btn-primary float-end" id="submitLoginInfo" data-bs-toggle="modal"
                 data-bs-target="#LogInModal">Đăng nhập</button>
             </div>
-            {{!-- modal
+            {{!-- modal --}}
             <div class="modal fade" id="LogInModal" aria-labelledby="LogInModalLabel" aria-hidden="true" tabindex="-1">
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -49,14 +51,14 @@
                 </div>
               </div>
             </div>
-          </form> --}}
-
-          <p class="text-center mt-3 text-secondary">Bạn chưa có tài khoản? <a href="/account/register" class="text-decoration-none">Đăng ký tại
-              đây</a></p>
+          </form>
+          <p class="text-center mt-3 text-secondary">Bạn chưa có tài khoản? <a href="/account/register"
+              class="text-decoration-none">Đăng ký tại
+              đây!</a></p>
         </div>
       </div>
     </div>
   </div>
   <!-- Core theme JS-->
-    <script src="../../public/js/scripts.js"></script>
+  <script src="../../public/js/scripts.js"></script>
 </body>

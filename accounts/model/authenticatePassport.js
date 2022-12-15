@@ -6,12 +6,12 @@ passport.use(
   new LocalStrategy({ usernameField: "username" }, async function verify(
     username,
     password,
-    cb
+    done
   ) {
     const user = await authenService.checkUserCredentials(username, password);
-    console.log(user);
-    if (user) return cb(null, user);
-    return cb(null, false); 
+    //console.log(user);
+    if (!user) return done(null, false);
+    return done(null, user);
   })
 );
 
