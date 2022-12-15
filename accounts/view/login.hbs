@@ -22,10 +22,11 @@
             </div>
 
             {{#if error}}
-            <div class="error">
-              {{error}}
+            <div class="error alert alert-danger mt-3" role="alert">
+              Tài khoản hoặc mật khẩu không đúng.
             </div>
             {{/if}}
+
 
             {{!-- login button --}}
             <div class="col-md-12 mt-2 mb-4">
@@ -51,12 +52,13 @@
             </div>
           </form> --}}
 
-          <p class="text-center mt-3 text-secondary">Bạn chưa có tài khoản? <a href="/account/register" class="text-decoration-none">Đăng ký tại
+          <p class="text-center mt-3 text-secondary">Bạn chưa có tài khoản? <a href="/account/register"
+              class="text-decoration-none">Đăng ký tại
               đây</a></p>
         </div>
       </div>
     </div>
   </div>
   <!-- Core theme JS-->
-    <script src="../../public/js/scripts.js"></script>
+  <script src="../../public/js/scripts.js"></script>
 </body>
