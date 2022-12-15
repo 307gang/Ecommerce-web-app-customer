@@ -16,7 +16,13 @@ exports.register = async (req, res) => {
     res.render("register", { error: "Invalid input" });
     return;
   }
-  const { "full-name": fullname, phone, address, username, password } = req.body;
+  const {
+    "full-name": fullname,
+    phone,
+    address,
+    username,
+    password,
+  } = req.body;
   try {
     await authenModel.register(username, password, fullname, phone, address);
   } catch (e) {
