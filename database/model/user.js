@@ -2,11 +2,11 @@ const db = require('./database');
 const { v4: uuidv4 } = require("uuid");
 
 async function generateUUID() {
-    var {rows} = await db.query("select uuid from users");
+    var {rowCount, rows} = await db.query("select uuid from users");
     while (true) {
       var exist = false;  
       var id = uuidv4();
-      for (let i = 0; i <= rows.length; i++) {
+      for (let i = 0; i < rowCount; i++) {
         if (id == rows[i].uuid) exist = true;
       }
       if (exist) continue;

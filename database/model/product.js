@@ -1,10 +1,5 @@
 const db = require('./database');
 
-// (async () => {
-//     var {rowCount, rows}= await db.query("select * from products where product_id = $1", ['015']);
-//     if (rowCount) console.log(rows);
-// })();
-
 module.exports.getAllProduct = async () => {
     var {rows}= await db.query("select * from products");
     return rows;
@@ -32,7 +27,6 @@ module.exports.getAllProductWithFilter = async (req) => {
         }
         filter_sql = filter_sql + `products.brand_id = '${brd}'`;
     }
-    console.log(`select distinct products.* from products, category_product ${filter_sql}`);
     const {rows} = await db.query(`select distinct products.* from products, category_product ${filter_sql}`);
     return rows;
 }

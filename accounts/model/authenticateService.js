@@ -1,5 +1,5 @@
 const bcrypt = require("bcryptjs");
-const db = require('../../postgresdb/model/user')
+const db = require('../../database/model/user')
 
 exports.register = async (username, password, fullname, phone, address) => {
   if (await db.userExists(username)) {
@@ -8,7 +8,6 @@ exports.register = async (username, password, fullname, phone, address) => {
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
   const id = await db.addUser(username, hashedPassword, fullname, phone, address);
-  console.log(id)
   return id;
 };
 

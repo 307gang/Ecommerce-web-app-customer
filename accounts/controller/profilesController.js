@@ -1,8 +1,7 @@
 const Ajv = require("ajv");
 const format = require("ajv-formats");
 
-// const db = require("../../database/model/usersDB");
-const db = require('../../postgresdb/model/user')
+const db = require('../../database/model/user')
 const profileSchema = require("../model/profileSchema");
 
 const ajv = new Ajv();
