@@ -37,12 +37,12 @@ module.exports = (req, res) => {
       order_state = `sortBy=${sortBy}&sortOrder=${sortOrder}`;
       // var result = await getProductList(req, `${filter_state}&${order_state}`);
       var product_list = await getProductList(req);
-      res.render("all-product", {product_list, originalUrl: req.baseUrl, category_list, brand_list, filter_state, order_state});
+      res.render("all-product", { originalUrl: req.baseUrl, category_list, brand_list, filter_state, order_state});
     }
     else{
       // var result = await getProductList(req, `${filter_state}`);
       var product_list = await getProductList(req);
-      res.render("all-product", {product_list, originalUrl: req.baseUrl, category_list, brand_list, filter_state, order_state});
+      res.render("all-product", {originalUrl: req.baseUrl, category_list, brand_list, filter_state, order_state});
     }
   })();
 };

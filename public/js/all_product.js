@@ -1,5 +1,38 @@
+async function getProducts(query) {
+    const response = await fetch('/database/products' + query, {
+        method: 'GET', // *GET, POST, PUT, DELETE, etc.
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        redirect: 'follow', // manual, *follow, error
+        referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    });
+    const result = await response.json();
+    return result;
+}
+
+
+
 $(document).ready(() => {
-    
+    Handlebars.registerHelper("multiply", function (a, b) {
+        return a * b;
+      });
+    $.get('/js/generate.handlebars').then((src) => {
+        var template= Handlebars.compile(src);
+        (async () => {
+            var data  = await getProducts("");
+            console.log(data);
+            var context = {product_list: data.products};
+            var html = template(context);
+            console.log(html);
+            $("#products").append(html);
+        })()
+    })
+
+
+
+    //filter
     var order = $('#order-state').val();
     var init_filter = $('#filter-state').val();
     var reg1 = /p_s=([^&]*)&p_e=([^&]*)/;
@@ -159,4 +192,7 @@ $(document).ready(() => {
                 window.location.href = `/all-product?${filter}`
         }   
     });
+
+
+  
 });

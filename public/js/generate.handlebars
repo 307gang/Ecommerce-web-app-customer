@@ -1,0 +1,23 @@
+<div class="row">
+    {{#each product_list}}
+    <div class="col-lg-4 col-md-5 mb-5">
+        <div class="card" style="width: 280px;">
+            <img src="{{product_image}}" width="280" height="350" class="card-img-top" alt="...">
+            <div class="card-body text-center">
+                <h5 class="card-title">{{product_name}}</h5>
+                <div class="d-flex justify-content-center small text-warning mb-2">
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                </div>
+                <p class="card-text">{{multiply price 1000}} VND</p>
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <a class="btn btn-outline-info" type="button" href="/product/{{product_id}}">Xem chi tiết</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</div>
