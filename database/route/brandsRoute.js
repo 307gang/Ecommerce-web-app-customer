@@ -1,9 +1,9 @@
 var express = require("express");
 var router = express.Router();
 
-var all = require('../controller/getBrandController');  
+var controller = require('../controller/brandController')
 
 
-router.get('', all);
+router.get('', controller.getAllBrand);
 
 module.exports = router;

@@ -30,10 +30,10 @@
     "hbs": "^4.2.0",
     "http-errors": "^2.0.0",
     "morgan": "^1.10.0",
-    "mysql2": "^2.3.3",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
+    "pg": "^8.8.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

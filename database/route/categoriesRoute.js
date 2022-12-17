@@ -1,10 +1,8 @@
 var express = require("express");
 var router = express.Router();
 
-var all = require('../controller/getCategoryController');  
-var sameCategory = require('../controller/getSameCategoryController');
+var controller = require('../controller/categoryController');
 
-router.get('', all);
-router.get('/:id',  sameCategory);
+router.get('', controller.getAllCategory);
 
 module.exports = router;
