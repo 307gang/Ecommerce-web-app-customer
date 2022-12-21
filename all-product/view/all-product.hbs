@@ -1,4 +1,5 @@
 <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
     <div class="container">
         <div class="row mt-5">
             <div class="row mt-5">
@@ -13,16 +14,11 @@
                         </div>
                     </div>
                     <div class="dropdown ml-4">
-                        <button class="btn border dropdown-toggle" type="button" id="triggerId"
-                                data-bs-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                            Sort by
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
-                            <li><a class="dropdown-item" href="{{originalUrl}}?{{filter_state}}&sortBy=created_date&sortOrder=asc">Mới nhất</a></li>
-                            <li><a class="dropdown-item" href="{{originalUrl}}?{{filter_state}}&sortBy=price&sortOrder=asc">Giá tăng dần</a></li>
-                            <li><a class="dropdown-item" href="{{originalUrl}}?{{filter_state}}&sortBy=price&sortOrder=desc">Giá giảm dần</a></li>
-                        </ul>
+                        <select class="btn border" id="sorted">
+                            <option value="sortBy=created_date&sortOrder=asc" selected>Mới nhất</option>
+                            <option value="sortBy=price&sortOrder=asc">Giá tăng dần</option>
+                            <option value="sortBy=price&sortOrder=desc">Giá giảm dần</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -81,7 +77,7 @@
                 <div class="mb-5">
                     <h5 class="font-weight-semi-bold mb-4">Lọc theo hãng sản xuất</h5>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input brand-filter" value="" id="brand-all">
+                        <input type="checkbox" class="custom-control-input brand-filter" value="" id="brand-all" checked>
                         <label class="custom-control-label" for="brand-all">Tất cả các hãng</label>
                     </div>
                     {{#each brand_list}}
@@ -96,35 +92,20 @@
             <!-- Shop Sidebar End -->
 
             <div class="col-lg-9 col-md-12">
-                <div class="group-clothes mt-4">
-                    <div class="row ">
-                        {{#each product_list}}
-                        <div class="col-lg-4 col-md-5 mb-5">
-                            <div class="card" style="width: 280px;">
-                                <img src="{{product_image}}" width="280" height="350" class="card-img-top" alt="...">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">{{product_name}}</h5>
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                    </div>
-                                    <p class="card-text">{{multiply price 1000}} VND</p>
-                                    <div class="d-grid gap-2 col-6 mx-auto">
-                                        <a class="btn btn-outline-info" type="button" href="/product/{{product_id}}">Xem chi tiết</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {{/each}}
-                    </div>
+                <div class="group-clothes mt-4 min-vh-100" id="products">
+                    
                 </div>
+                <nav aria-label="...">
+                    <ul class="pagination justify-content-center" id="nav">
+
+                    </ul>
+                </nav>
             </div>
         </div>
     <!-- Core theme JS-->
+    
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
     <script src="/js/all_product.js"></script>
+    
    
 </body>

@@ -1,6 +1,6 @@
-const db = require('../../database/model/getAllBrand');
+const db = require('../../database/model/brand');
 
 module.exports = async (req) => {
-    var result = await db();    
+    var result = await db.getAllBrand();    
     return result;
 }

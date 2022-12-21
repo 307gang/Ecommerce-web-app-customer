@@ -14,7 +14,7 @@ router.post(
   "/login",
   passport.authenticate("local", {
     successRedirect: "/",
-    failureRedirect: "/account/login",
+    failureRedirect: "/account/login?error=1",
   })
 );
 

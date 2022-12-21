@@ -1,6 +1,6 @@
-const db = require('../../database/model/getAllProduct');
+const db = require('../../database/model/product');
 
 module.exports = async (req) => {
-  var result = await db.noFilter();
+  var result = await db.getAllProduct();
   return result;
 }

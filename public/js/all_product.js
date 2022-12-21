@@ -1,162 +1,241 @@
+var rowsShown = 6;  
+
+function pagination(rowsTotal){
+    $('#nav').empty();
+    var numPages = rowsTotal/rowsShown;
+    // $('#nav').append('<li class="page-item disabled"><span class="page-link">Previous</span></li>');    
+    for (i = 0;i < numPages;i++) {  
+        var pageNum = i + 1;  
+        $('#nav').append ('<li class="page-item"><a class="page-link" href="#" rel="'+i+'">' + pageNum +'</a></li>');  
+    }  
+    // $('#nav').append('<li class="page-item"><span class="page-link">Next</span></li>');    
+    $('#list #item').hide();  
+    $('#list #item').slice (0, rowsShown).show();  
+    $('#nav a:first').addClass('active');
+}
+
+function updateQueryParam(queryString){
+    var url = new URL(window.location);
+    var params = new URLSearchParams(queryString);
+    url.search = params;
+    window.history.pushState({}, '', url);
+}
+
+function updateProductList(template, data){
+    $('#products').empty();
+    var context = {product_list: data.products};
+    var html = template(context);
+    $("#products").append(html);
+    pagination(data.products.length);
+}
+
 $(document).ready(() => {
-    
-    var order = $('#order-state').val();
-    var init_filter = $('#filter-state').val();
-    var reg1 = /p_s=([^&]*)&p_e=([^&]*)/;
-    var reg2 = /cat=([^&]*)/;
-    var reg3 = /brd=([^&]*)/;
-    var reg4 = /=([^&]*)/
-    var reg5 = /[A-Za-z0-9]+/
+    Handlebars.registerHelper("multiply", function (a, b) {
+        return a * b;
+    });
 
-    //initual value
-    var cat = init_filter.match(reg2);
-    if (cat){
-        var temp = cat[0].match(reg4);
-        var val = temp[0].match(reg5);
-        $(`#cat-${val[0]}`).prop("checked", true);
-    }
-    else {
-        $(`#cat-all`).prop("checked", true);
-    }
-
-    var p_s = init_filter.match(reg1);
-    var p_s_v = {"0": 1, "50": 2, "100": 3, "500": 4, "1000": 5};
-    if (p_s){
-        var temp = p_s[0].match(reg4);
-        var val = temp[0].match(reg5);
-        var index = val[0];
-        $(`#price-${p_s_v[index]}`).prop("checked", true);
-    }
-    else {
-        $(`#price-all`).prop("checked", true);
-    }
-
-    var brd = init_filter.match(reg3);
-    if (brd){
-        var temp = brd[0].match(reg4);
-        var val = temp[0].match(reg5);
-        $(`#brand-${val[0]}`).prop("checked", true);
-    }
-    else {
-        $(`#brand-all`).prop("checked", true);
-    }
-
-    //detect action
-    $('input[id^=price-]').change(function () {
+    $.get('/js/generate.handlebars').then(async (src) => {
+        var template= Handlebars.compile(src);
+        var order = $('#order-state').val();
         var filter = $('#filter-state').val();
-        console.log(filter.includes("p_s"));
-        if (this.checked){
-            if ($(this).data("value") != ""){
-                if (!filter) {
-                    filter = `p_s=${$(this).data("value").start}&p_e=${$(this).data("value").end}`;
-                }
-                if (filter.includes("p_s")){
 
-                    filter = filter.replace(reg1, `p_s=${$(this).data("value").start}&p_e=${$(this).data("value").end}`)
+        var init_query = "?", addedquery = false;
+        if (filter){
+            init_query =  init_query + filter;
+            addedquery = true;
+        }
+        if (order) {
+            if (addedquery) init_query = init_query + '&' + order;
+            else init_query = init_query + order;
+        }
+        //initialize product set
+        $.getJSON(`/database/products${init_query}`, (data) => {updateProductList(template, data); });
+        //------------------------------------------------------------------------------
+        // regex varible for query string
+        var priceQuery = /p_s=([^&]*)&p_e=([^&]*)/;
+        var catQuery = /cat=([^&]*)/;
+        var brdQuery = /brd=([^&]*)/;
+        var reg1 = /=([^&]*)/, reg2 = /[A-Za-z0-9]+/;
+        //------------------------------------------------------------------------------
+        //initialize filter
+        var cat = filter.match(catQuery);
+        if (cat){
+            var temp = cat[0].match(reg1);
+            var val = temp[0].match(reg2);
+            $(`#cat-${val[0]}`).prop("checked", true);
+        }
+        else {
+            $(`#cat-all`).prop("checked", true);
+        }
+
+        var p_s = filter.match(priceQuery);
+        var p_s_v = {"0": 1, "50": 2, "100": 3, "500": 4, "1000": 5};
+        if (p_s){
+            var temp = p_s[0].match(reg1);
+            var val = temp[0].match(reg2);
+            var index = val[0];
+            $(`#price-${p_s_v[index]}`).prop("checked", true);
+        }
+        else {
+            $(`#price-all`).prop("checked", true);
+        }
+
+        var brd = filter.match(brdQuery);
+        if (brd){
+            var temp = brd[0].match(reg1);
+            var val = temp[0].match(reg2);
+            $(`#brand-${val[0]}`).prop("checked", true);
+        }
+        else {
+            $(`#brand-all`).prop("checked", true);
+        }
+        //------------------------------------------------------------------------------
+        //filter action
+        $('input[id^=price-]').change(function () {
+            var queryString = "";
+            if (this.checked){
+                if ($(this).data("value") != ""){
+                    if (!filter) {
+                        filter = `p_s=${$(this).data("value").start}&p_e=${$(this).data("value").end}`;
+                    }
+                    if (filter.includes("p_s")){
+
+                        filter = filter.replace(priceQuery, `p_s=${$(this).data("value").start}&p_e=${$(this).data("value").end}`)
+                    }
+                    else{
+                        filter = filter + `&p_s=${$(this).data("value").start}&p_e=${$(this).data("value").end}`
+                    }
+                }
+                else{
+                    if (filter.includes("p_s")){
+                        filter = filter.replace(priceQuery, "")
+                    }
+                }
+                $('.price-filter').prop("checked", false);
+                $(this).prop("checked", true);
+                var queryString = "";
+                if (order){
+                    queryString = `${filter}&${order}`;
+                }
+                else{
+                    queryString = `${filter}`;
+                }
+                
+            }
+            else {
+                $('#price-all').prop("checked", true);
+                if (filter.includes("p_s")){
+                    filter = filter.replace(priceQuery, "")
+                }
+                if (order){
+                    queryString = `${filter}&${order}`;
+                }
+                else{
+                    queryString = `${filter}`;
+                }
+            }  
+            $.getJSON(`/database/products?${queryString}` , (data) => {updateProductList(template, data)});
+            updateQueryParam(queryString); 
+        });
+
+        $('input[id^=cat-]').change(function () {
+            var queryString = "";
+            if (this.checked){
+                if (!filter) {
+                    filter = `cat=${this.value}`
+                }
+                if (filter.includes("cat=")){
+                    filter = filter.replace(catQuery, `cat=${this.value}`)
+                }
+                else{
+                    filter = filter + `&cat=${this.value}`
+                }
+                $('.cat-filter').prop("checked", false);
+                $(this).prop("checked", true);
+                if (order){
+                    queryString = `${filter}&${order}`;
+                }
+                else{
+                    queryString = `${filter}`;
+                }
+            }
+            else {
+                $('#cat-all').prop("checked", true);
+                if (filter.includes("cat=")){
+                    filter = filter.replace(catQuery, "")
+                }
+                if (order){
+                    queryString = `${filter}&${order}`;
+                }
+                else{
+                    queryString = `${filter}`;
+                }
+            } 
+            $.getJSON(`/database/products?${queryString}` , (data) => {updateProductList(template, data)});
+            updateQueryParam(queryString);   
+        });
+
+        $('input[id^=brand-]').change(function () {
+            var queryString = "";
+            if (this.checked){
+                if (!filter) {
+                    filter = `brd=${this.value}`
+                }
+                if (filter.includes("brd=")){
+
+                    filter = filter.replace(brdQuery, `brd=${this.value}`)
                     console.log(filter);
                 }
                 else{
-                    filter = filter + `&p_s=${$(this).data("value").start}&p_e=${$(this).data("value").end}`
+                    filter = filter + `&brd=${this.value}`
+                }
+                $('.brand-filter').prop("checked", false);
+                $(this).prop("checked", true);
+                if (order){
+                    queryString = `${filter}&${order}`;
+                }
+                else{
+                    queryString = `${filter}`;
                 }
             }
-            else{
-                if (filter.includes("p_s")){
-
-                    filter = filter.replace(reg1, "")
+            else {
+                $('#brand-all').prop("checked", true);
+                if (filter.includes("brd=")){
+                    filter = filter.replace(brdQuery, "");
                     console.log(filter);
                 }
-            }
-            $('.price-filter').prop("checked", false);
-            $(this).prop("checked", true);
-            console.log($(this).data("value").start);
-            console.log($(this).data("value").end);
-            if (order)
-                window.location.href = `/all-product?${filter}&${order}`;
-            else
-                window.location.href = `/all-product?${filter}`
-        }
-        else {
-            var filter = $('#filter-state').val();
-            $('#price-all').prop("checked", true);
-            if (filter.includes("p_s")){
-                filter = filter.replace(reg1, "")
-                console.log(filter);
-            }
-            if (order)
-                window.location.href = `/all-product?${filter}&${order}`;
-            else
-                window.location.href = `/all-product?${filter}`
-        }   
+                if (order){
+                    queryString = `${filter}&${order}`;
+                }
+                else{
+                    queryString = `${filter}`;
+                }
+            }   
+            $.getJSON(`/database/products?${queryString}` , (data) => {updateProductList(template, data)});
+            updateQueryParam(queryString);  
+        });
+        //------------------------------------------------------------------------------
+        //order action
+        $('#sorted').change(function (){
+            $('#products').empty();
+            order = this.value;
+            $.getJSON(`/database/products?${filter}&${order}` , (data) => {updateProductList(template, data)});
+            updateQueryParam(`${filter}&${order}`);
+        });
+        //------------------------------------------------------------------------------
+        //pagination 
+        $('#nav').on('click', 'a', function(event) {  
+            event.preventDefault();
+            $('html, body').animate({ scrollTop: 0 }, 'fast');
+            $('#nav a').removeClass('active');  
+            $(this).addClass('active');  
+            var currPage = $(this).attr('rel');  
+            var startItem = currPage * rowsShown;  
+            var endItem = startItem + rowsShown;  
+            $('#list #item').animate({opacity:0}, 300).hide().slice(startItem, endItem).show().animate({opacity:1}, 300);  
             
-    });
-
-    $('input[id^=cat-]').change(function () {
-        var filter = $('#filter-state').val();
-        if (this.checked){
-            if (!filter) {
-                filter = `cat=${this.value}`
-            }
-            if (filter.includes("cat=")){
-                filter = filter.replace(reg2, `cat=${this.value}`)
-                console.log(filter);
-            }
-            else{
-                filter = filter + `&cat=${this.value}`
-            }
-            $('.cat-filter').prop("checked", false);
-            $(this).prop("checked", true);
-            if (order)
-                window.location.href = `/all-product?${filter}&${order}`;
-            else
-                window.location.href = `/all-product?${filter}`
-        }
-        else {
-            var filter = $('#filter-state').val();
-            $('#cat-all').prop("checked", true);
-            if (filter.includes("cat=")){
-                filter = filter.replace(reg2, "")
-                console.log(filter);
-            }
-            if (order)
-                window.location.href = `/all-product?${filter}&${order}`;
-            else
-                window.location.href = `/all-product?${filter}`
-        }   
-    });
-
-    $('input[id^=brand-]').change(function () {
-        var filter = $('#filter-state').val();
-        if (this.checked){
-            if (!filter) {
-                filter = `brd=${this.value}`
-            }
-            if (filter.includes("brd=")){
-                
-                filter = filter.replace(reg3, `brd=${this.value}`)
-                console.log(filter);
-            }
-            else{
-                filter = filter + `&brd=${this.value}`
-            }
-            $('.brand-filter').prop("checked", false);
-            $(this).prop("checked", true);
-            console.log(this.value);
-            if (order)
-                window.location.href = `/all-product?${filter}&${order}`;
-            else
-                window.location.href = `/all-product?${filter}`
-        }
-        else {
-            var filter = $('#filter-state').val();
-            $('#brand-all').prop("checked", true);
-            if (filter.includes("brd=")){
-                filter = filter.replace(reg3, "")
-                console.log(filter);
-            }
-            if (order)
-                window.location.href = `/all-product?${filter}&${order}`;
-            else
-                window.location.href = `/all-product?${filter}`
-        }   
+        });  
+        //source: https://www.javatpoint.com/jquery-pagination
+        //------------------------------------------------------------------------------
     });
 });
