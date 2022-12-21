@@ -9,6 +9,8 @@ var profile = require("../controller/profilesController");
 router.get("/register", register.registerStep);
 router.post("/register", register.register);
 
+router.get("/verify-email/:email", register.verifyEmail);
+
 router.get("/login", login.loginStep);
 router.post(
   "/login",

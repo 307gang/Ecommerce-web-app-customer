@@ -3,8 +3,8 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
-var hbs = require("hbs");
-var session = require("express-session");
+let hbs = require("hbs");
+let session = require("express-session");
 
 const indexRouter = require("./index/routes/indexRoute");
 
@@ -19,22 +19,25 @@ const passport = require("./accounts/model/authenticatePassport");
 
 const app = express();
 
-var views = [
-  "./public/asset",
-  "./index/view",
-  "./error",
-  "./accounts/view",
-  "./product/view",
-  "./information/view",
-  "./all-product/view",
-];
-
 hbs.registerHelper("multiply", function (a, b) {
   return a * b;
 });
 
-app.set("views", views);
-app.set("view engine", "hbs");
+let blocks = {};
+
+hbs.registerHelper("extend", function (name, context) {
+  let block = blocks[name];
+  if (!block) {
+    block = blocks[name] = [];
+  }
+  block.push(context.fn(this));
+});
+
+hbs.registerHelper("block", function (name) {
+  let val = (blocks[name] || []).join("\n");
+  blocks[name] = [];
+  return val;
+});
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -53,6 +56,21 @@ app.use(function (req, res, next) {
   res.locals.user = req.user;
   next();
 });
+
+
+
+var views = [
+  "./public/asset",
+  "./index/view",
+  "./error",
+  "./accounts/view",
+  "./product/view",
+  "./information/view",
+  "./all-product/view",
+];
+
+app.set("views", views);
+app.set("view engine", "hbs");
 
 app.use("/", indexRouter);
 app.use("/account", accountRouter);

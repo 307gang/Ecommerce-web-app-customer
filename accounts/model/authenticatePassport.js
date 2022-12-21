@@ -3,12 +3,12 @@ const LocalStrategy = require("passport-local");
 const authenService = require("./authenticateService");
 
 passport.use(
-  new LocalStrategy({ usernameField: "username" }, async function verify(
-    username,
+  new LocalStrategy({ emailField: "email" }, async function verify(
+    email,
     password,
     done
   ) {
-    const user = await authenService.checkUserCredentials(username, password);
+    const user = await authenService.checkUserCredentials(email, password);
     if (!user) return done(null, false);
     return done(null, user);
   })
@@ -16,7 +16,7 @@ passport.use(
 
 passport.serializeUser(function (user, cb) {
   process.nextTick(function () {
-    cb(null, { id: user.uuid, username: user.username });
+    cb(null, { id: user.uuid, email: user.email });
   });
 });
 
