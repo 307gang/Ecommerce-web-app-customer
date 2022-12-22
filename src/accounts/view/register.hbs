@@ -9,32 +9,30 @@
 
                         <div class="form-floating mb-3 col-md-12">
                             <input type="text" name="full-name" class="form-control" id="MyName" placeholder="Thịnh">
-                            <span id="MyName"></span>
                             <label for="MyName">Họ tên<span class="text-danger">*</span></label>
                         </div>
                         <div class="form-floating mb-3 col-md-12">
                             <input type="text" name="phone" class="form-control" id="MyNumber" placeholder="0123456789">
-                            <span id="MyNumber"></span>
                             <label for="MyNumber">Số điện thoại</label>
                         </div>
                         <div class="form-floating mb-3 col-md-12">
                             <input type="text" name="address" class="form-control" id="MyAddress"
                                 placeholder="227 Nguyễn Văn Cừ">
-                            <span id="MyAddress"></span>
                             <label for="MyAddress">Địa chỉ</label>
                         </div>
                         <div class="form-floating mb-3 col-md-12">
-                            <input type="text" name="username" class="form-control" id="MyAccount"
-                                placeholder="thinh123">
-                            <span id="MyAccount"></span>
-                            <label for="MyAccount">Tài khoản<span class="text-danger">*</span></label>
+                            <input type="email" name="email" class="form-control" id="MyEmail"
+                                placeholder="thinh123@gmail.com">
+                            <label for="MyEmail">Email<span class="text-danger">*</span></label>
                         </div>
                         <div class="form-floating col-md-12">
                             <input type="password" name="password" class="form-control" id="MyPassword"
                                 placeholder="123">
-                            <span id="MyPassword"></span>
                             <label for="MyPassword">Mật khẩu<span class="text-danger">*</span></label>
                         </div>
+
+                        <div class="error" id="error-email-existed" style="display: none">Email existed!</div>
+                        <div class="success" id="success-email-available" style="display: none">Email available!</div>
 
                         {{#if error}}
                         <div id="errornotif" style="color:red; text-align:center;  display:none;" class="error">
@@ -63,12 +61,30 @@
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-outline-secondary"
                                             data-bs-dismiss="modal">Đóng</button>
-                                        <a type="submit" class="btn btn-outline-primary" href="/account/login" role="button">Đăng nhập</a>
+                                        <a type="submit" class="btn btn-outline-primary" href="/account/login"
+                                            role="button">Đăng nhập</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </form>
+                    {{#extend "scripts"}}
+                    <script>
+                        $('#email').change(function () {
+                            $.getJSON("/verify-email/" + $(this).val(), function (data) {
+                                if (data) {
+                                    $('#error-email-existed').hide();
+                                    $('#success-email-available').show();
+                                    $('#submitLoginInfo').attr('disabled', false);
+                                } else {
+                                    $('#error-email-existed').show();
+                                    $('#success-email-available').hide();
+                                    $('#submitLoginInfo').attr('disabled', true);
+                                }
+                            })
+                        })
+                    </script>
+                    {{/extend}}
 
                     <p class="text-center mt-3 text-secondary">Bạn đã tạo tài khoản? <a href="/account/login"
                             class="text-decoration-none">Đăng nhập
