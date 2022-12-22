@@ -11,7 +11,6 @@ async function generateUUID() {
       if (id == rows[i].uuid) exist = true;
     }
     if (exist) continue;
-    console.log(id);
     return id;
   }
 }
@@ -44,17 +43,11 @@ module.exports.addUser = async (email, password, fullname, phone, address) => {
   console.log("adding ...");
   await db.query(
     "insert into users (uuid, email, password, admin) values ($1, $2, $3, false)",
-    [uuid, email, password],
-    (err) => {
-      console.log(err);
-    }
+    [uuid, email, password]
   );
   await db.query(
     "insert into customers (uuid, full_name, phone_number, address) values ($1, $2, $3, $4)",
-    [uuid, fullname, phone, address],
-    (err) => {
-      console.log(err);
-    }
+    [uuid, fullname, phone, address]
   );
 
   return uuid;

@@ -12,9 +12,7 @@ exports.register = async (email, password, fullname, phone, address) => {
 };
 
 exports.checkUserCredentials = async (email, password) => {
-  console.log(email, password);
   const user = await db.getUserByEmail(email);
-  console.log(user);
   if (!user) return null;
   const match = await bcrypt.compare(password, user.password);
   if (!match) return null;
