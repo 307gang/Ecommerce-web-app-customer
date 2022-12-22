@@ -1,22 +1,21 @@
-var rowsShown = 6;  
+var order = $('#order-state').val();
+var filter = $('#filter-state').val();
+var total = Number($("#total-pages").val());
+var page = Number($("#page").val());
 
-function pagination(rowsTotal){
+function pagination(numPages){
     $('#nav').empty();
-    var numPages = rowsTotal/rowsShown;
     // $('#nav').append('<li class="page-item disabled"><span class="page-link">Previous</span></li>');    
     for (i = 0;i < numPages;i++) {  
         var pageNum = i + 1;  
-        $('#nav').append ('<li class="page-item"><a class="page-link" href="#" rel="'+i+'">' + pageNum +'</a></li>');  
+        $('#nav').append ('<li class="page-item"><a class="page-link" id="' + pageNum + '" href="#" rel="'+i+'">' + pageNum +'</a></li>');  
     }  
     // $('#nav').append('<li class="page-item"><span class="page-link">Next</span></li>');    
-    $('#list #item').hide();  
-    $('#list #item').slice (0, rowsShown).show();  
-    $('#nav a:first').addClass('active');
+    $(`#nav #${page}`).addClass('active');
 }
 
 function updateQueryParam(queryString){
     var url = new URL(window.location);
-    console.log(url);
     var params = new URLSearchParams(queryString);
     url.search = params;
     window.history.pushState({}, '', url);
@@ -27,7 +26,6 @@ function getUrl(path, queryString){
     url.pathname = path;
     var params = new URLSearchParams(queryString);
     url.search = params;
-    console.log(url);
     return url;
 }
 
@@ -37,8 +35,9 @@ function updateProductList(template, data){
     var context = {product_list: data.products};
     var html = template(context);
     $("#products").append(html);
-    pagination(data.products.length);
+    pagination(total);
 }
+
 
 $(document).ready(() => {
     Handlebars.registerHelper("multiply", function (a, b) {
@@ -47,28 +46,10 @@ $(document).ready(() => {
 
     $.get('/js/generate.handlebars').then(async (src) => {
         var template= Handlebars.compile(src);
-        var order = $('#order-state').val();
-        var filter = $('#filter-state').val();
-
-        const params = new Proxy(new URLSearchParams(window.location.search), {
-            get: (searchParams, prop) => searchParams.get(prop),
-        });
-        console.log(params.p_s);
-          
-        // var init_query = "?", addedquery = false;
-        // if (filter){
-        //     init_query =  init_query + filter;
-        //     addedquery = true;
-        // }
-        // if (order) {
-        //     if (addedquery) init_query = init_query + '&' + order;
-        //     else init_query = init_query + order;
-        // }
-        //initialize product set
-        // $.getJSON(`/database/products${init_query}`, (data) => {updateProductList(template, data); });
-        //------------------------------------------------------------------------------
+        var cur_page = `page=${page}`;
+        
         // regex varible for query string
-        pagination(10);
+        pagination(total);
         var priceQuery = /p_s=([^&]*)&p_e=([^&]*)/;
         var catQuery = /cat=([^&]*)/;
         var brdQuery = /brd=([^&]*)/;
@@ -131,32 +112,26 @@ $(document).ready(() => {
                 $('.price-filter').prop("checked", false);
                 $(this).prop("checked", true);
                 var queryString = "";
-                if (order){
-                    queryString = `${filter}&${order}`;
-                }
-                else{
-                    queryString = `${filter}`;
-                }
-                
             }
             else {
                 $('#price-all').prop("checked", true);
                 if (filter.includes("p_s")){
                     filter = filter.replace(priceQuery, "")
                 }
-                if (order){
-                    queryString = `${filter}&${order}`;
-                }
-                else{
-                    queryString = `${filter}`;
-                }
             }  
-            $.getJSON(getUrl('/database/products', `${filter}&${order}`) , (data) => {updateProductList(template, data)});
-            updateQueryParam(`${filter}&${order}`);
+            page = 1;
+            cur_page = `page=${page}`;
+            $.getJSON(getUrl('/database/total/products', `${filter}`), (data) => {
+                if (Number(data.total)){
+                    total = Math.ceil(Number(data.total) / 6);
+                }
+                else total = 1;
+            });
+            $.getJSON(getUrl('/database/products', `${filter}&${order}&range=6&start=${(page - 1) * 6}`) , (data) => {updateProductList(template, data)});
+            updateQueryParam(`${filter}&${order}&${cur_page}`);
         });
 
         $('input[id^=cat-]').change(function () {
-            var queryString = "";
             if (this.checked){
                 if (!filter) {
                     filter = `cat=${this.value}`
@@ -169,31 +144,26 @@ $(document).ready(() => {
                 }
                 $('.cat-filter').prop("checked", false);
                 $(this).prop("checked", true);
-                if (order){
-                    queryString = `${filter}&${order}`;
-                }
-                else{
-                    queryString = `${filter}`;
-                }
             }
             else {
                 $('#cat-all').prop("checked", true);
                 if (filter.includes("cat=")){
                     filter = filter.replace(catQuery, "")
                 }
-                if (order){
-                    queryString = `${filter}&${order}`;
-                }
-                else{
-                    queryString = `${filter}`;
-                }
             } 
-            $.getJSON(getUrl('/database/products', `${filter}&${order}`) , (data) => {updateProductList(template, data)});
-            updateQueryParam(`${filter}&${order}`);
+            page = 1;
+            cur_page = `page=${page}`;
+            $.getJSON(getUrl('/database/total/products', `${filter}`), (data) => {
+                if (Number(data.total)){
+                    total = Math.ceil(Number(data.total) / 6);
+                }
+                else total = 1;
+            });
+            $.getJSON(getUrl('/database/products', `${filter}&${order}&range=6&start=${(page - 1) * 6}`) , (data) => {updateProductList(template, data)});
+            updateQueryParam(`${filter}&${order}&${cur_page}`);
         });
 
         $('input[id^=brand-]').change(function () {
-            var queryString = "";
             if (this.checked){
                 if (!filter) {
                     filter = `brd=${this.value}`
@@ -208,12 +178,6 @@ $(document).ready(() => {
                 }
                 $('.brand-filter').prop("checked", false);
                 $(this).prop("checked", true);
-                if (order){
-                    queryString = `${filter}&${order}`;
-                }
-                else{
-                    queryString = `${filter}`;
-                }
             }
             else {
                 $('#brand-all').prop("checked", true);
@@ -221,38 +185,44 @@ $(document).ready(() => {
                     filter = filter.replace(brdQuery, "");
                     console.log(filter);
                 }
-                if (order){
-                    queryString = `${filter}&${order}`;
-                }
-                else{
-                    queryString = `${filter}`;
-                }
             }   
-            $.getJSON(getUrl('/database/products', `${filter}&${order}`) , (data) => {updateProductList(template, data)});
-            updateQueryParam(`${filter}&${order}`); 
+            page = 1;
+            cur_page = `page=${page}`;
+            $.getJSON(getUrl('/database/total/products', `${filter}`), (data) => {
+                if (Number(data.total)){
+                    total = Math.ceil(Number(data.total) / 6);
+                }
+                else total = 1;
+            });
+            $.getJSON(getUrl('/database/products', `${filter}&${order}&range=6&start=${(page - 1) * 6}`) , (data) => {updateProductList(template, data)});
+            updateQueryParam(`${filter}&${order}&${cur_page}`);
         });
         //------------------------------------------------------------------------------
         //order action
         $('#sorted').change(function (){
             $('#products').empty();
             order = this.value;
-            $.getJSON(`/database/products?${filter}&${order}` , (data) => {updateProductList(template, data)});
-            updateQueryParam(`${filter}&${order}`);
+            page = 1;
+            cur_page = `page=${page}`;
+            $.getJSON(getUrl('/database/products', `${filter}&${order}&range=6&start=${(page - 1) * 6}`) , (data) => {updateProductList(template, data)});
+            updateQueryParam(`${filter}&${order}&${cur_page}`);
         });
         //------------------------------------------------------------------------------
-        //pagination 
+        //pagination action
         $('#nav').on('click', 'a', function(event) {  
             event.preventDefault();
+            //pagination ui modified
             $('html, body').animate({ scrollTop: 0 }, 'fast');
             $('#nav a').removeClass('active');  
             $(this).addClass('active');  
-            var currPage = $(this).attr('rel');  
-            var startItem = currPage * rowsShown;  
-            var endItem = startItem + rowsShown;  
-            $('#list #item').animate({opacity:0}, 300).hide().slice(startItem, endItem).show().animate({opacity:1}, 300);  
-            
+            //update new product list
+            page = Number($(this).attr('id'));
+            cur_page = `page=${page}`;
+            $('#list #item').animate({opacity:0}, 300); //hide item
+            $.getJSON(getUrl('/database/products', `${filter}&${order}&range=6&start=${(page - 1) * 6}`) , (data) => {updateProductList(template, data)});
+            updateQueryParam(`${filter}&${order}&${cur_page}`);
+            $('#list #item').animate({opacity:1}, 300); //show item
         });  
-        //source: https://www.javatpoint.com/jquery-pagination
         //------------------------------------------------------------------------------
     });
 });

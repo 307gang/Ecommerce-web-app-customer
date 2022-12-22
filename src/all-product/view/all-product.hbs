@@ -24,8 +24,6 @@
             </div>
             <!-- Shop Sidebar Start -->
             <div class="col-lg-2 col-md-12" id="filter">
-                <input type="hidden" id="filter-state" value={{filter_state}}>
-                <input type="hidden" id="order-state" value={{order_state}}>
                 <!-- Price Start -->
                 <div class="border-bottom mb-4 pb-4">
                     <h5 class="font-weight-semi-bold mb-4">Lọc theo giá</h5>
@@ -77,7 +75,7 @@
                 <div class="mb-5">
                     <h5 class="font-weight-semi-bold mb-4">Lọc theo hãng sản xuất</h5>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input brand-filter" value="" id="brand-all" checked>
+                        <input type="checkbox" class="custom-control-input brand-filter" value="" id="brand-all">
                         <label class="custom-control-label" for="brand-all">Tất cả các hãng</label>
                     </div>
                     {{#each brand_list}}
@@ -125,7 +123,10 @@
             </div>
         </div>
     <!-- Core theme JS-->
-    
+    <input type="hidden" id="filter-state" value={{filter_state}}>
+    <input type="hidden" id="order-state" value={{order_state}}>
+    <input type="hidden" id="total-pages" value={{total_pages}}>
+    <input type="hidden" id="page" value={{page}}>
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
     <script src="/js/all_product.js"></script>
     

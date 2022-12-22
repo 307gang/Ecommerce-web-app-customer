@@ -15,6 +15,7 @@ const allProductRouter = require("./all-product/routes/index");
 const productDatabase = require("./database/route/productsRoute");
 const categoryDatabase = require("./database/route/categoriesRoute");
 const brandDatabase = require("./database/route/brandsRoute");
+const totalDatabase = require("./database/route/totalRoute");
 const passport = require("./accounts/model/authenticatePassport");
 
 const app = express();
@@ -78,6 +79,7 @@ app.use("/all-product", allProductRouter);
 app.use("/database/products", productDatabase);
 app.use("/database/categories", categoryDatabase);
 app.use("/database/brands", brandDatabase);
+app.use("/database/total", totalDatabase);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
