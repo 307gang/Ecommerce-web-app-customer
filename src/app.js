@@ -19,8 +19,6 @@ const passport = require("./accounts/model/authenticatePassport");
 
 const app = express();
 
-<<<<<<< HEAD:app.js
-=======
 var views = [
   path.join(__dirname, "/public/asset"),
   path.join(__dirname, "/index/view"),
@@ -31,7 +29,6 @@ var views = [
   path.join(__dirname, "/all-product/view"),
 ];
 
->>>>>>> f76a815f99735e13e5a7e2eb8ba57ce1267c1f06:src/app.js
 hbs.registerHelper("multiply", function (a, b) {
   return a * b;
 });
@@ -69,18 +66,6 @@ app.use(function (req, res, next) {
   res.locals.user = req.user;
   next();
 });
-
-
-
-var views = [
-  "./public/asset",
-  "./index/view",
-  "./error",
-  "./accounts/view",
-  "./product/view",
-  "./information/view",
-  "./all-product/view",
-];
 
 app.set("views", views);
 app.set("view engine", "hbs");
