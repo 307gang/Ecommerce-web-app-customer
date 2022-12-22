@@ -17,6 +17,7 @@ exports.register = async (req, res) => {
     return;
   }
   const { "full-name": fullname, phone, address, email, password } = req.body;
+  console.log(req.body);
   try {
     await authenModel.register(email, password, fullname, phone, address);
   } catch (e) {

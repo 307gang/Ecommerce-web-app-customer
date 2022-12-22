@@ -2,6 +2,7 @@ const db = require("./database");
 const { v4: uuidv4 } = require("uuid");
 
 async function generateUUID() {
+  console.log("genID");
   var { rowCount, rows } = await db.query("select uuid from users");
   while (true) {
     var exist = false;
@@ -10,14 +11,15 @@ async function generateUUID() {
       if (id == rows[i].uuid) exist = true;
     }
     if (exist) continue;
+    console.log(id);
     return id;
   }
 }
 
-module.exports.updateUser = async (id, fullname, phone, email, address) => {
+module.exports.updateUser = async (id, fullname, phone, address) => {
   await db.query(
-    "update customers set full_name = $1, phone_number = $2, email = $3, address = $4 where uuid = $5",
-    [fullname, phone, email, address, id]
+    "update customers set full_name = $1, phone_number = $2, address = $4 where uuid = $5",
+    [fullname, phone, address, id]
   );
 };
 
@@ -39,20 +41,27 @@ module.exports.userExists = async (username) => {
 
 module.exports.addUser = async (email, password, fullname, phone, address) => {
   var uuid = await generateUUID();
+  console.log("adding ...");
   await db.query(
     "insert into users (uuid, email, password, admin) values ($1, $2, $3, false)",
-    [uuid, email, password]
+    [uuid, email, password],
+    (err) => {
+      console.log(err);
+    }
   );
   await db.query(
     "insert into customers (uuid, full_name, phone_number, address) values ($1, $2, $3, $4)",
-    [uuid, fullname, phone, address]
+    [uuid, fullname, phone, address],
+    (err) => {
+      console.log(err);
+    }
   );
 
   return uuid;
 };
 
 module.exports.getUserByEmail = async (email) => {
-  const { rows } = await db.query(
+  var {rows} = await db.query(
     "select * from users where email = $1 limit 1",
     [email]
   );
@@ -60,9 +69,11 @@ module.exports.getUserByEmail = async (email) => {
 };
 
 module.exports.emailExists = async (email) => {
-  const result = await db.connection.execute(
+  console.log("checking ...")
+  const {rowCount} = await db.query(
     "select * from users where email = $1 limit 1",
     [email]
   );
-  return result[0].length > 0;
+  console.log(rowCount);
+  return rowCount > 0;
 };

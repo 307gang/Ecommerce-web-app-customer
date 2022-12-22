@@ -1,6 +1,6 @@
 create table users(
-	uuid varchar(6),
-    username varchar(100) unique not null,
+	uuid varchar(36),
+    email varchar(100) unique not null,
     password varchar(100) not null,
     admin boolean not null,
     
@@ -8,11 +8,10 @@ create table users(
 );
 
 create table customers(
-    uuid varchar(6),
+    uuid varchar(36),
     full_name varchar(100),
-    email varchar(200),
     phone_number varchar(11),
-    address varchar(6),
+    address varchar(1000),
     create_date date,
     user_avt varchar(200),
     banned boolean,
@@ -22,11 +21,9 @@ create table customers(
 );
 
 create table admins(
-    uuid varchar(6),
+    uuid varchar(36),
     full_name varchar(100),
-    email varchar(200),
     phone_number varchar(11),
-
     primary key (uuid),
     foreign key (uuid) references users(uuid)
 ); 
