@@ -20,13 +20,13 @@ const passport = require("./accounts/model/authenticatePassport");
 const app = express();
 
 var views = [
-  "./public/asset",
-  "./index/view",
-  "./error",
-  "./accounts/view",
-  "./product/view",
-  "./information/view",
-  "./all-product/view",
+  path.join(__dirname, "/public/asset"),
+  path.join(__dirname, "/index/view"),
+  path.join(__dirname, "/error"),
+  path.join(__dirname, "/accounts/view"),
+  path.join(__dirname, "/product/view"),
+  path.join(__dirname, "/information/view"),
+  path.join(__dirname, "/all-product/view"),
 ];
 
 hbs.registerHelper("multiply", function (a, b) {
@@ -40,7 +40,7 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static("./public"));
+app.use(express.static(path.join(__dirname, "/public")));
 app.use(
   session({
     secret: "secret",
