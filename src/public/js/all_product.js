@@ -16,10 +16,21 @@ function pagination(rowsTotal){
 
 function updateQueryParam(queryString){
     var url = new URL(window.location);
+    console.log(url);
     var params = new URLSearchParams(queryString);
     url.search = params;
     window.history.pushState({}, '', url);
 }
+
+function getUrl(path, queryString){
+    var url = new URL(window.location);
+    url.pathname = path;
+    var params = new URLSearchParams(queryString);
+    url.search = params;
+    console.log(url);
+    return url;
+}
+
 
 function updateProductList(template, data){
     $('#products').empty();
@@ -39,19 +50,25 @@ $(document).ready(() => {
         var order = $('#order-state').val();
         var filter = $('#filter-state').val();
 
-        var init_query = "?", addedquery = false;
-        if (filter){
-            init_query =  init_query + filter;
-            addedquery = true;
-        }
-        if (order) {
-            if (addedquery) init_query = init_query + '&' + order;
-            else init_query = init_query + order;
-        }
+        const params = new Proxy(new URLSearchParams(window.location.search), {
+            get: (searchParams, prop) => searchParams.get(prop),
+        });
+        console.log(params.p_s);
+          
+        // var init_query = "?", addedquery = false;
+        // if (filter){
+        //     init_query =  init_query + filter;
+        //     addedquery = true;
+        // }
+        // if (order) {
+        //     if (addedquery) init_query = init_query + '&' + order;
+        //     else init_query = init_query + order;
+        // }
         //initialize product set
-        $.getJSON(`/database/products${init_query}`, (data) => {updateProductList(template, data); });
+        // $.getJSON(`/database/products${init_query}`, (data) => {updateProductList(template, data); });
         //------------------------------------------------------------------------------
         // regex varible for query string
+        pagination(10);
         var priceQuery = /p_s=([^&]*)&p_e=([^&]*)/;
         var catQuery = /cat=([^&]*)/;
         var brdQuery = /brd=([^&]*)/;
@@ -134,8 +151,8 @@ $(document).ready(() => {
                     queryString = `${filter}`;
                 }
             }  
-            $.getJSON(`/database/products?${queryString}` , (data) => {updateProductList(template, data)});
-            updateQueryParam(queryString); 
+            $.getJSON(getUrl('/database/products', `${filter}&${order}`) , (data) => {updateProductList(template, data)});
+            updateQueryParam(`${filter}&${order}`);
         });
 
         $('input[id^=cat-]').change(function () {
@@ -171,8 +188,8 @@ $(document).ready(() => {
                     queryString = `${filter}`;
                 }
             } 
-            $.getJSON(`/database/products?${queryString}` , (data) => {updateProductList(template, data)});
-            updateQueryParam(queryString);   
+            $.getJSON(getUrl('/database/products', `${filter}&${order}`) , (data) => {updateProductList(template, data)});
+            updateQueryParam(`${filter}&${order}`);
         });
 
         $('input[id^=brand-]').change(function () {
@@ -211,8 +228,8 @@ $(document).ready(() => {
                     queryString = `${filter}`;
                 }
             }   
-            $.getJSON(`/database/products?${queryString}` , (data) => {updateProductList(template, data)});
-            updateQueryParam(queryString);  
+            $.getJSON(getUrl('/database/products', `${filter}&${order}`) , (data) => {updateProductList(template, data)});
+            updateQueryParam(`${filter}&${order}`); 
         });
         //------------------------------------------------------------------------------
         //order action

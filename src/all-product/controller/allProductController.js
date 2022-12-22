@@ -33,9 +33,10 @@ module.exports = (req, res) => {
     }
     var order_state = "";
     //CREATE SORT STATE AND DECIDE WHICH MODEL TO RUN
-    if (sortBy)
+    if (sortBy){
       order_state = `sortBy=${sortBy}&sortOrder=${sortOrder}`;
-
-    res.render("all-product", {category_list, brand_list, filter_state, order_state});
+    }
+    var product_list = await getProductList(req);
+    res.render("all-product", {product_list, category_list, brand_list, filter_state, order_state});
   })();
 };
