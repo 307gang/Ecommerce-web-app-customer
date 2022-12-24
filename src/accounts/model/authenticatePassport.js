@@ -3,7 +3,8 @@ const LocalStrategy = require("passport-local");
 const authenService = require("./authenticateService");
 
 passport.use(
-  new LocalStrategy({ emailField: "email" }, async function verify(
+  
+  new LocalStrategy({ usernameField: "email" , passwordField: "password"}, async function verify(
     email,
     password,
     done
