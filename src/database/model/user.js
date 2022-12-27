@@ -15,6 +15,7 @@ async function generateUUID() {
   }
 }
 
+// TODO: add update date
 module.exports.updateUser = async (id, fullname, phone, address) => {
   await db.query(
     "update customers set full_name = $1, phone_number = $2, address = $4 where uuid = $5",
@@ -38,6 +39,7 @@ module.exports.userExists = async (username) => {
   return rowCount > 0;
 };
 
+// TODO: add createDate
 module.exports.addUser = async (email, password, fullname, phone, address) => {
   var uuid = await generateUUID();
   console.log("adding ...");

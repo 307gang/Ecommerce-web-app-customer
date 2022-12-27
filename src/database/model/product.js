@@ -1,5 +1,7 @@
 const db = require('./database');
 
+// TODO: Add hidden products
+
 module.exports.getAllProduct = async () => {
     var {rows}= await db.query("select * from products");
     return rows;

@@ -11,6 +11,7 @@ exports.register = async (email, password, fullname, phone, address) => {
   return id;
 };
 
+// TODO: check banned user
 exports.checkUserCredentials = async (email, password) => {
   const user = await db.getUserByEmail(email);
   if (!user) return null;
