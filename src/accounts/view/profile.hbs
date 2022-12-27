@@ -8,7 +8,7 @@
             <h3 class="mb-4 text-secondary">Trang cá nhân</h3>
 
             <div class="mb-3 col-md-12 d-flex justify-content-center">
-              <img src="/asset/img/avatar.png" class="rounded-3 avatar" style="width: 150px;" alt="Avatar"/>
+              <img src="/asset/img/avatar.png" class="rounded-3 avatar" style="width: 150px;" alt="Avatar" />
             </div>
             <div class="mb-3 d-flex justify-content-center">
               <a class="btn btn-info" href="#" role="button" id="changeAvatar">Thay đổi ảnh đại diện</a>
@@ -43,8 +43,28 @@
             </div>
 
             <div class="mb-4 col-md-12">
-              <a class="btn btn-danger me-3" href="#" role="button" id="changePassword">Thay đổi mật khẩu</a>
-              <button type="submit" class="btn btn-dark float-end" id="commitInfo">Cập nhật</button>
+              <a class="btn btn-danger me-3" href="/account/updatePassword" role="button" id="changePassword">Thay đổi
+                mật khẩu</a>
+              <button type="submit" class="btn btn-dark float-end" id="commitInfo" data-bs-toggle="modal"
+                data-bs-target="#InfoModal">Cập nhật</button>
+            </div>
+
+            <div class="modal fade" id="InfoModal" aria-labelledby="InfoModalLabel" aria-hidden="true" tabindex="-1">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Thông báo</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <p>Bạn có chắc chắn cập nhật không?</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Không</button>
+                    <button type="submit" class="btn btn-outline-success" data-bs-dismiss="modal">Có</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </form>
         </div>
