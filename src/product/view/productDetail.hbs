@@ -1,97 +1,143 @@
 <body>
-    <!-- Product section-->
-    <section class="py-5">
-        <div class="container px-4 px-lg-5 my-5">
-            <div class="row gx-4 gx-lg-5 align-items-center">
-                <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{product.product_image}}" width="600"
-                        height="700" alt="..." /></div>
-                <div class="col-md-6">
-                    <h1 class="display-5 fw-bolder">{{product.product_name}}</h1>
-                    <div class="fs-5 mb-5">
-                        <span class="text-decoration-line-through">{{multiply product.price 1000}}</span>
-                        <span>{{multiply product.price 1000}}VND</span>
-                    </div>
-                    <p class="lead">
-                        {{product.description}}
-                    </p>
-                    
-                    {{!-- Chọn size --}}
-                    <div class="d-flex">
-                        <!-- Example single danger button -->
-                        <div class="dropdown me-3">
-                            <button type="button" class="btn btn-outline-danger dropdown-toggle"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Size
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">S</a></li>
-                                <li><a class="dropdown-item" href="#">M</a></li>
-                                <li><a class="dropdown-item" href="#">L</a></li>
-                            </ul>
-                        </div>
+  <!-- Product section-->
+  <section class="py-5">
+    <div class="container px-4 px-lg-5 my-5">
+      <div class="row gx-4 gx-lg-5 align-items-center">
+        <div class="col-md-6"><img
+            class="card-img-top mb-5 mb-md-0"
+            src="{{product.product_image}}"
+            width="600"
+            height="700"
+            alt="..."
+          /></div>
+        <div class="col-md-6">
+          <h1 class="display-5 fw-bolder">{{product.product_name}}</h1>
+          <div class="fs-5 mb-5">
+            <span class="text-decoration-line-through">{{multiply
+                product.price
+                1000
+              }}</span>
+            <span>{{multiply product.price 1000}}VND</span>
+          </div>
+          <p class="lead">
+            {{product.description}}
+          </p>
 
-                        <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1"
-                            style="max-width: 3rem" />
-                        <button type="button" class="btn btn-outline-dark flex-shrink-0" id="liveToastBtn"><i
-                                class="bi-cart-fill me-1"></i>Thêm vào giỏ hàng</button>
-                        <div class="toast-container position-fixed bottom-0 end-0 p-3">
-                            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                                <div class="toast-header">
-                                    <img src="/asset/img/green-check.png" class="rounded me-2" alt="...">
-                                    <strong class="me-auto">Thông báo</strong>
-                                    <small>Vừa xong</small>
-                                    <button type="button" class="btn-close" data-bs-dismiss="toast"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="toast-body">
-                                    Thêm vào giỏ hàng thành công.
-                                </div>
-                                <script>
-                                    const toastTrigger = document.getElementById("liveToastBtn");
-                                    const toastLiveExample = document.getElementById("liveToast");
-                                    if (toastTrigger) {
-                                        toastTrigger.addEventListener("click", () => {
-                                            const toast = new bootstrap.Toast(toastLiveExample);
-                                            toast.show();
-                                        });
-                                    }
-                                </script>
-                            </div>
-                        </div>
-                    </div>
+          {{! Chọn size }}
+          <div class="d-flex">
+            <!-- Example single danger button -->
+            <div class="dropdown me-3">
+              <button
+                type="button"
+                class="btn btn-outline-danger dropdown-toggle"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Size
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">S</a></li>
+                <li><a class="dropdown-item" href="#">M</a></li>
+                <li><a class="dropdown-item" href="#">L</a></li>
+              </ul>
+            </div>
+
+            <input
+              class="form-control text-center me-3"
+              id="inputQuantity"
+              type="num"
+              value="1"
+              style="max-width: 3rem"
+            />
+            <button
+              type="button"
+              class="btn btn-outline-dark flex-shrink-0"
+              id="liveToastBtn"
+            ><i class="bi-cart-fill me-1"></i>Thêm vào giỏ hàng</button>
+            <div class="toast-container position-fixed bottom-0 end-0 p-3">
+              <div
+                id="liveToast"
+                class="toast"
+                role="alert"
+                aria-live="assertive"
+                aria-atomic="true"
+              >
+                <div class="toast-header">
+                  <img
+                    src="/asset/img/green-check.png"
+                    class="rounded me-2"
+                    alt="..."
+                  />
+                  <strong class="me-auto">Thông báo</strong>
+                  <small>Vừa xong</small>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="toast"
+                    aria-label="Close"
+                  ></button>
                 </div>
+                <div class="toast-body">
+                  Thêm vào giỏ hàng thành công.
+                </div>
+                <script>
+                  const toastTrigger = document.getElementById("liveToastBtn");
+                  const toastLiveExample = document.getElementById("liveToast");
+                  if (toastTrigger) { toastTrigger.addEventListener("click",
+                  function() { const toast = new
+                  bootstrap.Toast(toastLiveExample); toast.show(); }); }
+                </script>
+              </div>
             </div>
+          </div>
         </div>
-    </section>
-    <!-- Related items section-->
-    <section class="py-5 bg-light">
-        <div class="container px-4 px-lg-5 mt-5">
-            <h2 class="fw-bolder mb-4">Các sản phẩm liên quan</h2>
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                {{#each related_products}}
-                    <div class="col-lg-4 col-md-5 mb-5">
-                        <div class="card" style="width: 280px;">
-                            <img src="{{product_image}}" width="280" height="350" class="card-img-top" alt="...">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">{{product_name}}</h5>
-                                <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                </div>
-                                <p class="card-text">{{multiply price 1000}} VND</p>
-                                <div class="d-grid gap-2 col-6 mx-auto">
-                                    <a class="btn btn-outline-info" type="button" href="/product/{{product_id}}">Xem chi tiết</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {{/each}}
+      </div>
+    </div>
+  </section>
+  <!-- Related items section-->
+  <section class="py-5 bg-light">
+    <div class="container px-4 px-lg-5 mt-5">
+      <h2 class="fw-bolder mb-4">Các sản phẩm liên quan</h2>
+      <div
+        class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
+        id="relate-products"
+      >
+        {{#each related_products}}
+          <div class="col-lg-4 col-md-5 mb-5">
+            <div class="card" style="width: 280px;">
+              <img
+                src="{{product_image}}"
+                width="280"
+                height="350"
+                class="card-img-top"
+                alt="..."
+              />
+              <div class="card-body text-center">
+                <h5 class="card-title">{{product_name}}</h5>
+                <div
+                  class="d-flex justify-content-center small text-warning mb-2"
+                >
+                  <div class="bi-star-fill"></div>
+                  <div class="bi-star-fill"></div>
+                  <div class="bi-star-fill"></div>
+                  <div class="bi-star-fill"></div>
+                  <div class="bi-star-fill"></div>
+                </div>
+                <p class="card-text">{{multiply price 1000}} VND</p>
+                <div class="d-grid gap-2 col-6 mx-auto">
+                  <a
+                    class="btn btn-outline-info"
+                    type="button"
+                    href="/product/{{product_id}}"
+                  >Xem chi tiết</a>
+                </div>
+              </div>
             </div>
-        </div>
-    </section>
-    <!-- Core theme JS-->
-    <script src="/js/scripts.js"></script>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </section>
+  <!-- Core theme JS-->
+  <script src="/js/scripts.js"></script>
 </body>

@@ -14,6 +14,7 @@ module.exports = (req, res) => {
     const { search } = req.query;
     const { sortBy, sortOrder } = req.query;
     const { page } = req.query;
+    console.log(search);
     //SET UP PRODUCT LIST
     req.query.start = `${(page - 1) * 6}`;
     req.query.range = "6";
@@ -38,6 +39,12 @@ module.exports = (req, res) => {
         filter_state = filter_state + "&";
       }
       filter_state = filter_state + `brd=${brd}`;
+    }
+    if (search) {
+      if (first_fil) {
+        filter_state = filter_state + "&";
+      }
+      filter_state = filter_state + `search=${search}`;
     }
     var order_state = "";
     //CREATE SORT STATE AND DECIDE WHICH MODEL TO RUN

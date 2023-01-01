@@ -18,6 +18,7 @@ module.exports.getAllProductWithFilter = async (req) => {
   const { p_s, p_e } = req.query;
   const { brd } = req.query;
   const { range, start } = req.query;
+  const { search } = req.query;
   var filter_sql = "where ";
   var first_fil = false;
   if (cat) {
@@ -39,6 +40,15 @@ module.exports.getAllProductWithFilter = async (req) => {
     }
     filter_sql = filter_sql + `products.brand_id = '${brd}'`;
   }
+
+  if (search) {
+    if (first_fil) {
+      filter_sql = filter_sql + " and ";
+    }
+    filter_sql =
+      filter_sql + `lower(products.product_name) like lower('%${search}%')`;
+  }
+
   if (range && start) {
     const { rows } = await db.query(
       `select distinct products.* from products, category_product ${filter_sql} order by product_id limit $1 offset $2`,
@@ -74,6 +84,7 @@ module.exports.getAllProductSortedWithFilter = async (req) => {
   const { p_s, p_e } = req.query;
   const { brd } = req.query;
   const { range, start } = req.query;
+  const { search } = req.query;
   var filter_sql = "where ";
   var first_fil = false;
   if (cat) {
@@ -95,6 +106,15 @@ module.exports.getAllProductSortedWithFilter = async (req) => {
     }
     filter_sql = filter_sql + `products.brand_id = '${brd}'`;
   }
+
+  if (search) {
+    if (first_fil) {
+      filter_sql = filter_sql + " and ";
+    }
+    filter_sql =
+      filter_sql + `lower(products.product_name) like lower('%${search}%')`;
+  }
+
   if (range && start) {
     const { rows } = await db.query(
       `select distinct products.* from products, category_product ${filter_sql} order by products.${sortBy} ${sortOrder} limit $1 offset $2`,
@@ -102,6 +122,7 @@ module.exports.getAllProductSortedWithFilter = async (req) => {
     );
     return rows;
   }
+
   const { rows } = await db.query(
     `select distinct products.* from products, category_product ${filter_sql} order by products.${sortBy} ${sortOrder}`
   );
@@ -117,6 +138,7 @@ module.exports.totalProductWithFilter = async (req) => {
   const { cat } = req.query;
   const { p_s, p_e } = req.query;
   const { brd } = req.query;
+  const { search } = req.query;
   var filter_sql = "where ";
   var first_fil = false;
   if (cat) {
@@ -137,6 +159,14 @@ module.exports.totalProductWithFilter = async (req) => {
       filter_sql = filter_sql + " and ";
     }
     filter_sql = filter_sql + `products.brand_id = '${brd}'`;
+  }
+
+  if (search) {
+    if (first_fil) {
+      filter_sql = filter_sql + " and ";
+    }
+    filter_sql =
+      filter_sql + `lower(products.product_name) like lower('%${search}%')`;
   }
   const { rows } = await db.query(
     `select count(distinct products.*) as total from products, category_product ${filter_sql}`

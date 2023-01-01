@@ -59,6 +59,7 @@ $(document).ready(() => {
     var priceQuery = /p_s=([^&]*)&p_e=([^&]*)/;
     var catQuery = /cat=([^&]*)/;
     var brdQuery = /brd=([^&]*)/;
+    var srchQuery = /search=([^&]*)/;
     var reg1 = /=([^&]*)/,
       reg2 = /[A-Za-z0-9]+/;
     //------------------------------------------------------------------------------
@@ -90,6 +91,15 @@ $(document).ready(() => {
       $(`#brand-${val[0]}`).prop("checked", true);
     } else {
       $(`#brand-all`).prop("checked", true);
+    }
+
+    var search = filter.match(srchQuery);
+    console.log(search);
+    if (search) {
+      var temp = search[0].match(reg1);
+      var val = temp[0].match(reg2);
+      var index = val[0];
+      $(`#search-box`).val(index);
     }
     //------------------------------------------------------------------------------
     //filter action
@@ -203,6 +213,36 @@ $(document).ready(() => {
         if (filter.includes("brd=")) {
           filter = filter.replace(brdQuery, "");
         }
+      }
+      page = 1;
+      cur_page = `page=${page}`;
+      $.getJSON(getUrl("/database/total/products", `${filter}`), (data) => {
+        if (Number(data.total)) {
+          total = Math.ceil(Number(data.total) / 6);
+        } else total = 1;
+      });
+      $.getJSON(
+        getUrl(
+          "/database/products",
+          `${filter}&${order}&range=6&start=${(page - 1) * 6}`
+        ),
+        (data) => {
+          updateProductList(template, data);
+        }
+      );
+      updateQueryParam(`${filter}&${order}&${cur_page}`);
+    });
+
+    $("#search-btn").on("click", function (event) {
+      event.preventDefault();
+      var input = $("#search-box").val();
+      if (!filter) {
+        filter = `search=${input}`;
+      }
+      if (filter.includes("search=")) {
+        filter = filter.replace(srchQuery, `search=${input}`);
+      } else {
+        filter = filter + `&search=${this.value}`;
       }
       page = 1;
       cur_page = `page=${page}`;
