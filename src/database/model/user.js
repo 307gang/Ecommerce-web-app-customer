@@ -49,7 +49,7 @@ module.exports.addUser = async (email, password, fullname, phone, address) => {
     [uuid, email, password]
   );
   await db.query(
-    "insert into customers (uuid, full_name, phone_number, address) values ($1, $2, $3, $4)",
+    "insert into customers (uuid, full_name, phone_number, user_avt, address) values ($1, $2, $3, '/asset/img/avatar.png', $4)",
     [uuid, fullname, phone, address]
   );
 
