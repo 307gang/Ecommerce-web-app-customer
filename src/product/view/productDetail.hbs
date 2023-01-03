@@ -14,7 +14,7 @@
                     <p class="lead">
                         {{product.description}}
                     </p>
-                    
+
                     {{!-- Chọn size --}}
                     <div class="d-flex">
                         <!-- Example single danger button -->
@@ -63,31 +63,62 @@
             </div>
         </div>
     </section>
+
+    {{!-- comment --}}
+    <div class="container mb-5">
+        <div class="d-flex justify-content-center row">
+            <div class="col-md-8">
+                <div class="d-flex flex-column comment-section">
+                    <div class="bg-white p-2">
+                        <div class="d-flex flex-row user-info">
+                            <img class="rounded-circle me-3" src="/asset/img/img_avatar.png" width="40">
+                            <div class="d-flex flex-column justify-content-start ml-2">
+                                    <span class="d-block font-weight-bold name">Marry Andrews</span></div>
+                        </div>
+                        <div class="mt-2">
+                            <p class="comment-text">Áo đẹp.</p>
+                        </div>
+                    </div>
+                    <div class="bg-light p-2">
+                        <div class="d-flex flex-row align-items-start">
+                            <img class="rounded-circle me-3" src="/asset/img/img_avatar.png" width="40">
+                                <textarea class="form-control ml-3 shadow-none textarea"></textarea></div>
+                        <div class="mt-2 text-right">
+                            <button class="btn btn-primary btn-sm shadow-none" type="submit">Post comment</button>
+                                <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Related items section-->
     <section class="py-5 bg-light">
         <div class="container px-4 px-lg-5 mt-5">
             <h2 class="fw-bolder mb-4">Các sản phẩm liên quan</h2>
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 {{#each related_products}}
-                    <div class="col-lg-4 col-md-5 mb-5">
-                        <div class="card" style="width: 280px;">
-                            <img src="{{product_image}}" width="280" height="350" class="card-img-top" alt="...">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">{{product_name}}</h5>
-                                <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                </div>
-                                <p class="card-text">{{multiply price 1000}} VND</p>
-                                <div class="d-grid gap-2 col-6 mx-auto">
-                                    <a class="btn btn-outline-info" type="button" href="/product/{{product_id}}">Xem chi tiết</a>
-                                </div>
+                <div class="col-lg-4 col-md-5 mb-5">
+                    <div class="card" style="width: 280px;">
+                        <img src="{{product_image}}" width="280" height="350" class="card-img-top" alt="...">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">{{product_name}}</h5>
+                            <div class="d-flex justify-content-center small text-warning mb-2">
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                            </div>
+                            <p class="card-text">{{multiply price 1000}} VND</p>
+                            <div class="d-grid gap-2 col-6 mx-auto">
+                                <a class="btn btn-outline-info" type="button" href="/product/{{product_id}}">Xem chi
+                                    tiết</a>
                             </div>
                         </div>
                     </div>
+                </div>
                 {{/each}}
             </div>
         </div>
