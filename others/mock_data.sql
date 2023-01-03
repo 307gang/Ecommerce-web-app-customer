@@ -41,3 +41,7 @@ insert into category_product (category_id,product_id ) values
 ('2','012'),
 ('3','013'),
 ('2','014');
+
+insert into comment (product_id, customer_id, comment, comment_date) values
+('001','1','Sản phẩm tốt','2020/12/10'),
+('002','2','Sản phẩm tốt','2020/12/10');

@@ -97,3 +97,14 @@ create table order_product(
     foreign key (order_id) references orders(order_id),
     foreign key (product_id) references products(product_id)
 );
+
+create table comment (
+    product_id varchar(6),
+    customer_id varchar(36),
+    comment text,
+    create_date date,
+
+    primary key (product_id, customer_id),
+    foreign key (product_id) references products(product_id),
+    foreign key (customer_id) references customers(uuid)
+);
