@@ -7,11 +7,18 @@
 
             <h3 class="mb-4 text-secondary">Trang cá nhân</h3>
 
+            <div class="mb-3 col-md-12 d-flex justify-content-center">
+              <img src="/asset/img/avatar.png" class="rounded-3 avatar" style="width: 150px;" alt="Avatar" />
+            </div>
+            <div class="mb-3 d-flex justify-content-center">
+              <a class="btn btn-info" href="#" role="button" id="changeAvatar">Thay đổi ảnh đại diện</a>
+            </div>
+
             <div class="mb-3 col-md-12 form-floating">
-              <input type="text" name="" class="form-control" id="MyUsername" value="{{user.username}}"
-                placeholder="abcd" disabled readonly>
-              <span id="MyUsername"></span>
-              <label for="MyUsername">Tài khoản</label>
+              <input type="email" name="" class="form-control" id="MyEmail" value="{{user.email}}" placeholder="abcd"
+                disabled readonly>
+              <span id="MyEmail"></span>
+              <label for="MyEmail">Email</label>
             </div>
 
             <div class="mb-3 col-md-12 form-floating">
@@ -29,21 +36,35 @@
             </div>
 
             <div class="mb-3 col-md-12 form-floating">
-              <input type="email" name="email" class="form-control" id="MyEmail" value="{{userinfo.email}}"
-                placeholder="abc@gmail.com">
-              <span id="MyEmail"></span>
-              <label for="MyEmail">Email<span class="text-secondary"></span></label>
-            </div>
-
-            <div class="mb-4 col-md-12 form-floating">
               <input type="text" name="address" class="form-control" id="MyAddress" value="{{userinfo.address}}"
                 placeholder="123 ABC">
               <span id="MyAddress"></span>
               <label for="MyAddress">Địa Chỉ<span class="text-secondary"></span></label>
             </div>
 
-            <div class="mb-5 col-md-12">
-              <button type="submit" class="btn btn-primary float-end" id="commitInfo">Cập nhật</button>
+            <div class="mb-4 col-md-12">
+              <a class="btn btn-danger me-3" href="/account/updatePassword" role="button" id="changePassword">Thay đổi
+                mật khẩu</a>
+              <button type="submit" class="btn btn-dark float-end" id="commitInfo" data-bs-toggle="modal"
+                data-bs-target="#InfoModal">Cập nhật</button>
+            </div>
+
+            <div class="modal fade" id="InfoModal" aria-labelledby="InfoModalLabel" aria-hidden="true" tabindex="-1">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Thông báo</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <p>Bạn có chắc chắn cập nhật không?</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Không</button>
+                    <button type="submit" class="btn btn-outline-success" data-bs-dismiss="modal">Có</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </form>
         </div>

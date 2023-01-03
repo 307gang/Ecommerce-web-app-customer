@@ -51,7 +51,9 @@ module.exports = (req, res) => {
     if (sortBy) {
       order_state = `sortBy=${sortBy}&sortOrder=${sortOrder}`;
     }
+    console.log(req.query);
     var product_list = await getProductList(req);
+    console.log(product_list);
     var total_product = await getTotalProduct(req);
     var total_pages = 1;
     if (Number(total_product.total)) {

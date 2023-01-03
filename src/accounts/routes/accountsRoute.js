@@ -25,4 +25,7 @@ router.get("/logout", register.logout);
 router.get("/info", profile.profileStep);
 router.post("/info", profile.profileUpdate);
 
+router.get("/updatePassword", profile.passwordStep);
+router.post("/updatePassword", profile.passwordUpdate);
+
 module.exports = router;

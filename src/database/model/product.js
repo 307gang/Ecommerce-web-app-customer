@@ -9,7 +9,7 @@ module.exports.getAllProduct = async (req) => {
     );
     return rows;
   }
-  var { rows } = await db.query("select * from products");
+  var { rows } = await db.query("select * from products order by product_id");
   return rows;
 };
 

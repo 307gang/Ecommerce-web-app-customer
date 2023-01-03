@@ -11,6 +11,7 @@ exports.register = async (email, password, fullname, phone, address) => {
   return id;
 };
 
+// TODO: check banned user
 exports.checkUserCredentials = async (email, password) => {
   const user = await db.getUserByEmail(email);
   if (!user) return null;
@@ -21,4 +22,14 @@ exports.checkUserCredentials = async (email, password) => {
 
 exports.emailExists = (email) => {
   db.emailExists(email);
+};
+
+exports.updatePassword = async (id, oldPassword, newPassword) => {
+  const salt = await bcrypt.genSalt(10);
+  const user = await db.getUserById(id);
+  const match = await bcrypt.compare(oldPassword, user.password);
+  if (!match) return 404;
+  const hashedNewPassword = await bcrypt.hash(newPassword, salt);
+  const code = await db.updatePassword(id, hashedNewPassword);
+  return code;
 };

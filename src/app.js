@@ -20,7 +20,7 @@ const passport = require("./accounts/model/authenticatePassport");
 
 const app = express();
 
-var views = [
+let views = [
   path.join(__dirname, "/public/asset"),
   path.join(__dirname, "/index/view"),
   path.join(__dirname, "/error"),
@@ -48,6 +48,10 @@ hbs.registerHelper("block", function (name) {
   let val = (blocks[name] || []).join("\n");
   blocks[name] = [];
   return val;
+});
+
+hbs.registerHelper("ifEquals", function (arg1, arg2, options) {
+  return arg1 == arg2 ? options.fn(this) : options.inverse(this);
 });
 
 app.use(logger("dev"));
