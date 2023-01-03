@@ -74,6 +74,7 @@ create table orders(
     order_name varchar(100),
     description text,
     customer_id varchar(6),
+    status int,
     create_date date,
 
     primary key (order_id),

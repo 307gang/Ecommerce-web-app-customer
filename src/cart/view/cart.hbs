@@ -131,7 +131,7 @@
                                 </li>
                             </ul>
 
-                            <button type="button" class="btn btn-primary btn-lg btn-block">
+                            <button type="button" class="btn btn-primary btn-lg btn-block" id="checkout">
                                 Go to checkout
                             </button>
                         </div>
@@ -140,4 +140,12 @@
             </div>
         </div>
     </section>
+     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(() => {
+            $("#checkout").on('click', function () {
+                    $.post(window.location.href, function (e) { });
+                });
+        })
+    </script>
 </body>
