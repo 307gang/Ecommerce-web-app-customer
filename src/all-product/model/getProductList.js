@@ -39,7 +39,7 @@ module.exports = async (req) => {
             return result;
         }
         else {
-            var result = await db.getAllProduct();
+            var result = await db.getAllProduct(req);
             // res.send({products: result});
             return result;
         }

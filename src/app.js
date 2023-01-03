@@ -16,6 +16,7 @@ const allProductRouter = require("./all-product/routes/index");
 const productDatabase = require("./database/route/productsRoute");
 const categoryDatabase = require("./database/route/categoriesRoute");
 const brandDatabase = require("./database/route/brandsRoute");
+const totalDatabase = require("./database/route/totalRoute");
 const passport = require("./accounts/model/authenticatePassport");
 const cartRouter = require("./cart/routes/cartRoutes");
 
