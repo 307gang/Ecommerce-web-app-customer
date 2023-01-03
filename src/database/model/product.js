@@ -1,5 +1,6 @@
 const db = require("./database");
 const dayjs = require("dayjs");
+var relativeTime = require("dayjs/plugin/relativeTime");
 
 module.exports.getAllProduct = async () => {
   var { rows } = await db.query("select * from products");
@@ -107,11 +108,15 @@ module.exports.addComment = async (req) => {
   const { productid } = req.params;
   const { uuid } = req.query;
   const { comment } = req.body;
-  var fromNow = dayjs().format("YYYY-MM-DD").fromNow();
+
+  dayjs.extend(relativeTime);
+  var fromNow = dayjs().fromNow(); 
+  // now trả ra chuỗi 
+  // https://day.js.org/docs/en/display/from-now
 
   const { rows } = await db.query(
-    "insert into comments (product_id, customer_id, comment, date) values ($1, $2, $3, $4)",
-    [productid, uuid, comment, fromNow]
+    "insert into comments (product_id, customer_id, comment) values ($1, $2, $3, $4)",
+    [productid, uuid, comment]
   );
   return rows[0];
 };
