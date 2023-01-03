@@ -67,8 +67,7 @@ create table carts (
     primary key (customer_id, product_id);
     foreign key(customer_id) references customers(uuid)
     foreign key (product_id) references products(product_id)
-)
-}
+);
 
 create table orders(
 	order_id varchar(4),

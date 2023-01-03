@@ -16,10 +16,10 @@ async function generateUUID() {
 }
 
 // TODO: add update date
-module.exports.updateUser = async (id, fullname, phone, address) => {
+module.exports.updateUser = async (id, user_avt, fullname, phone, address) => {
   await db.query(
-    "update customers set full_name = $1, phone_number = $2, address = $4 where uuid = $5",
-    [fullname, phone, address, id]
+    "update customers set full_name = $1, phone_number = $2, address = $3, user_avt = $4 where uuid = $5",
+    [fullname, phone, address, user_avt, id]
   );
   return 200;
 };

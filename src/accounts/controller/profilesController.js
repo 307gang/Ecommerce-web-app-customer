@@ -21,12 +21,14 @@ exports.profileStep = (req, res) => {
 
 exports.profileUpdate = async (req, res) => {
   var { id } = req.user;
+  console.log(req.body, !ajv.validate(profileSchema, req.body));
   if (!ajv.validate(profileSchema, req.body)) return;
 
-  const { "full-name": fullname, phone, email, address } = req.body;
+  const { user_avt, "full-name": fullname, phone, email, address } = req.body;
   try {
-    await db.updateUser(id, fullname, phone, email, address);
+    await db.updateUser(id, user_avt, fullname, phone, email, address);
   } catch (e) {
+    console.log(e);
     return;
   }
   res.redirect("/account/info");
