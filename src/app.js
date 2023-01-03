@@ -38,7 +38,7 @@ hbs.registerHelper("multiply", function (a, b) {
   return a * b;
 });
 
-hbs.registerHelper("multiply", function (a, b, c) {
+hbs.registerHelper("multiply3", function (a, b, c) {
   return a * b * c;
 });
 

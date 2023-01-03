@@ -108,7 +108,7 @@ create table order_product(
     foreign key (product_id) references products(product_id)
 );
 
-create table comment (
+create table comments (
     product_id varchar(6),
     customer_id varchar(36),
     comment text,

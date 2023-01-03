@@ -100,19 +100,21 @@
       <div class="col-md-8">
         <div class="d-flex flex-column comment-section">
           <div class="bg-white p-2">
-            <div class="d-flex flex-row user-info">
-              <img
-                class="rounded-circle me-3"
-                src="/asset/img/img_avatar.png"
-                width="40"
-              />
-              <div class="d-flex flex-column justify-content-start ml-2">
-                <span class="d-block font-weight-bold name">Marry Andrews</span></div>
+          {{#each comments}}
+            <div class="bg-white p-2">
+              <div class="d-flex flex-row user-info">
+                <img class="rounded-circle me-3" src="{{avatar}}" width="40" />
+                <div class="d-flex flex-column justify-content-start ml-2">
+                  <span
+                    class="d-block font-weight-bold name"
+                  >{{email}}</span></div>
+              </div>
+              <div class="mt-2">
+                <p class="comment-text">{{comment}}</p>
+              </div>
             </div>
-            <div class="mt-2">
-              <p class="comment-text">Áo đẹp.</p>
-            </div>
-          </div>
+          {{/each}}
+
           <div class="bg-light p-2">
             <div class="d-flex flex-row align-items-start">
               <img

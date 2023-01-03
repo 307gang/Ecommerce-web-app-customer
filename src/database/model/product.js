@@ -190,14 +190,12 @@ module.exports.getSameCategoryProduct = async (id) => {
   return rows;
 };
 
-module.exports.getCommentByProductIdAndUserId = async (req) => {
-  const { productid } = req.params;
-  const { uuid } = req.query;
+module.exports.getCommentByProductId = async (id) => {
   const { rows } = await db.query(
-    "select * from comments where product_id = $1 and customer_id = $2",
-    [productid, uuid]
+    "select * from comments where product_id = $1 ",
+    [id]
   );
-  return rows[0];
+  return rows;
 };
 
 module.exports.addComment = async (req) => {

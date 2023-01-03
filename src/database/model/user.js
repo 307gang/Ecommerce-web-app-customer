@@ -26,7 +26,7 @@ module.exports.updateUser = async (id, user_avt, fullname, phone, address) => {
 
 module.exports.getUserInfo = async (id) => {
   var { rows } = await db.query(
-    "select c.* from customers c where c.uuid = $1",
+    "select c.*, u.email from customers c, users u where c.uuid = $1 and u.uuid = c.uuid",
     [id]
   );
   return rows[0];
