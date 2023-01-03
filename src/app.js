@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 let hbs = require("hbs");
 let session = require("express-session");
+const cors = require("cors");
 
 const indexRouter = require("./index/routes/indexRoute");
 
@@ -17,6 +18,7 @@ const categoryDatabase = require("./database/route/categoriesRoute");
 const brandDatabase = require("./database/route/brandsRoute");
 const totalDatabase = require("./database/route/totalRoute");
 const passport = require("./accounts/model/authenticatePassport");
+const cartRouter = require("./cart/routes/cartRoutes");
 
 const app = express();
 
@@ -28,6 +30,7 @@ let views = [
   path.join(__dirname, "/product/view"),
   path.join(__dirname, "/information/view"),
   path.join(__dirname, "/all-product/view"),
+  path.join(__dirname, "/cart/view"),
 ];
 
 hbs.registerHelper("multiply", function (a, b) {
@@ -54,6 +57,7 @@ hbs.registerHelper("ifEquals", function (arg1, arg2, options) {
   return arg1 == arg2 ? options.fn(this) : options.inverse(this);
 });
 
+app.use(cors());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -83,7 +87,9 @@ app.use("/all-product", allProductRouter);
 app.use("/database/products", productDatabase);
 app.use("/database/categories", categoryDatabase);
 app.use("/database/brands", brandDatabase);
+
 app.use("/database/total", totalDatabase);
+app.use("/cart", cartRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
