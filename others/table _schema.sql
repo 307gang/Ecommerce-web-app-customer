@@ -59,6 +59,17 @@ create table product_image( -- bảng ảnh phụ sản phẩm
     foreign key (product_id) references products(product_id)
 );
 
+create table carts (
+    customer_id varchar(36),
+    product_id varchar(6),
+    quantity int,
+
+    primary key (customer_id, product_id);
+    foreign key(customer_id) references customers(uuid)
+    foreign key (product_id) references products(product_id)
+)
+}
+
 create table orders(
 	order_id varchar(4),
     order_name varchar(100),
