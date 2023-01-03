@@ -19,10 +19,11 @@ const brandDatabase = require("./database/route/brandsRoute");
 const totalDatabase = require("./database/route/totalRoute");
 const passport = require("./accounts/model/authenticatePassport");
 const cartRouter = require("./cart/routes/cartRoutes");
+const imgAuth = require("./imgAuth/routes/authRoute");
 
 const app = express();
 
-var views = [
+let views = [
   path.join(__dirname, "/public/asset"),
   path.join(__dirname, "/index/view"),
   path.join(__dirname, "/error"),
@@ -35,6 +36,10 @@ var views = [
 
 hbs.registerHelper("multiply", function (a, b) {
   return a * b;
+});
+
+hbs.registerHelper("multiply", function (a, b, c) {
+  return a * b * c;
 });
 
 let blocks = {};
@@ -51,6 +56,10 @@ hbs.registerHelper("block", function (name) {
   let val = (blocks[name] || []).join("\n");
   blocks[name] = [];
   return val;
+});
+
+hbs.registerHelper("ifEquals", function (arg1, arg2, options) {
+  return arg1 == arg2 ? options.fn(this) : options.inverse(this);
 });
 
 app.use(cors());
@@ -83,7 +92,10 @@ app.use("/all-product", allProductRouter);
 app.use("/database/products", productDatabase);
 app.use("/database/categories", categoryDatabase);
 app.use("/database/brands", brandDatabase);
+
+app.use("/database/total", totalDatabase);
 app.use("/cart", cartRouter);
+app.use("/auth", imgAuth);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

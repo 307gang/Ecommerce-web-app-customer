@@ -1,3 +1,8 @@
 h1 {
-    display: block;
+  display: block;
+}
+
+#relate-products {
+  height: 550px;
+  overflow-y: scroll; /* Add vertical scrollbar */
 }

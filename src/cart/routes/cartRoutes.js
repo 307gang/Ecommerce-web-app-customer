@@ -3,6 +3,6 @@ var router = express.Router();
 
 var cart = require("../../cart/controller/cartController");
 
-router.get("/cart", cart);
+router.get("", cart);
 
 module.exports = router;
