@@ -8,140 +8,66 @@
             <h3 class="mb-4 text-secondary">Trang cá nhân</h3>
 
             <div class="mb-3 col-md-12 d-flex justify-content-center">
-              <img
-                src="{{userinfo.user_avt}}"
-                class="rounded-3 avatar"
-                style="width: 150px;"
-                alt="Avatar"
-                id="mainImgSelect"
-              />
+              <img src="{{userinfo.user_avt}}" class="rounded-3 avatar" style="width: 150px;" alt="Avatar"
+                id="mainImgSelect" />
             </div>
             <div class="mb-3 d-flex justify-content-center">
-              <button id="upload-btn" type="button" class="btn btn-info">Thay
+              <button id="upload-btn" type="button" class="btn btn-info me-3">Thay
                 đổi ảnh đại diện</button>
               <button id="delete-btn" type="button" class="btn btn-info">Xoá ảnh
                 đại diện</button>
-              <input
-                id="get-file"
-                type="file"
-                accept="image/png, image/jpeg"
-                hidden
-              />
-              <input
-                id="file"
-                value="{{userinfo.user_avt}}"
-                name="user_avt"
-                hidden
-              />
+              <input id="get-file" type="file" accept="image/png, image/jpeg" hidden />
+              <input id="file" value="{{userinfo.user_avt}}" name="user_avt" hidden />
             </div>
 
             <div class="mb-3 col-md-12 form-floating">
-              <input
-                type="email"
-                name="email"
-                class="form-control"
-                id="MyEmail"
-                value="{{user.email}}"
-                placeholder="abcd"
-                readonly
-              />
+              <input type="email" name="email" class="form-control" id="MyEmail" value="{{user.email}}"
+                placeholder="abcd" readonly />
               <span id="MyEmail"></span>
               <label for="MyEmail">Email</label>
             </div>
 
             <div class="mb-3 col-md-12 form-floating">
-              <input
-                type="text"
-                name="full-name"
-                class="form-control"
-                id="MyName"
-                value="{{userinfo.full_name}}"
-                placeholder="thinh"
-              />
+              <input type="text" name="full-name" class="form-control" id="MyName" value="{{userinfo.full_name}}"
+                placeholder="thinh" />
               <span id="MyName"></span>
-              <label for="MyName">Họ và Tên<span
-                  class="text-secondary"
-                ></span></label>
+              <label for="MyName">Họ và Tên<span class="text-secondary"></span></label>
             </div>
 
             <div class="mb-3 col-md-12 form-floating">
-              <input
-                type="text"
-                name="phone"
-                class="form-control"
-                id="MyNumber"
-                value="{{userinfo.phone_number}}"
-                placeholder="01234"
-              />
+              <input type="text" name="phone" class="form-control" id="MyNumber" value="{{userinfo.phone_number}}"
+                placeholder="01234" />
               <span id="MyNumber"></span>
-              <label for="MyNumber">Số điện thoại<span
-                  class="text-secondary"
-                ></span></label>
+              <label for="MyNumber">Số điện thoại<span class="text-secondary"></span></label>
             </div>
 
             <div class="mb-3 col-md-12 form-floating">
-              <input
-                type="text"
-                name="address"
-                class="form-control"
-                id="MyAddress"
-                value="{{userinfo.address}}"
-                placeholder="123 ABC"
-              />
+              <input type="text" name="address" class="form-control" id="MyAddress" value="{{userinfo.address}}"
+                placeholder="123 ABC" />
               <span id="MyAddress"></span>
-              <label for="MyAddress">Địa Chỉ<span
-                  class="text-secondary"
-                ></span></label>
+              <label for="MyAddress">Địa Chỉ<span class="text-secondary"></span></label>
             </div>
 
             <div class="mb-4 col-md-12">
-              <a
-                class="btn btn-danger me-3"
-                href="/account/updatePassword"
-                role="button"
-                id="changePassword"
-              >Thay đổi mật khẩu</a>
-              <button
-                type="submit"
-                class="btn btn-dark float-end"
-                id="commitInfo"
-                data-bs-toggle="modal"
-                data-bs-target="#InfoModal"
-              >Cập nhật</button>
+              <a class="btn btn-danger me-3" href="/account/updatePassword" role="button" id="changePassword">Thay đổi
+                mật khẩu</a>
+              <button type="submit" class="btn btn-dark float-end" id="commitInfo" data-bs-toggle="modal"
+                data-bs-target="#InfoModal">Cập nhật</button>
             </div>
 
-            <div
-              class="modal fade"
-              id="InfoModal"
-              aria-labelledby="InfoModalLabel"
-              aria-hidden="true"
-              tabindex="-1"
-            >
+            <div class="modal fade" id="InfoModal" aria-labelledby="InfoModalLabel" aria-hidden="true" tabindex="-1">
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                   <div class="modal-header">
                     <h4 class="modal-title">Thông báo</h4>
-                    <button
-                      type="button"
-                      class="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    ></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
                     <p>Bạn có chắc chắn cập nhật không?</p>
                   </div>
                   <div class="modal-footer">
-                    <button
-                      type="button"
-                      class="btn btn-outline-danger"
-                      data-bs-dismiss="modal"
-                    >Không</button>
-                    <button
-                      type="submit"
-                      class="btn btn-outline-success"
-                      data-bs-dismiss="modal"
-                    >Có</button>
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Không</button>
+                    <button type="submit" class="btn btn-outline-success" data-bs-dismiss="modal">Có</button>
                   </div>
                 </div>
               </div>
@@ -152,9 +78,6 @@
     </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-  <script
-    type="text/javascript"
-    src="https://unpkg.com/imagekit-javascript/dist/imagekit.min.js"
-  ></script>
+  <script type="text/javascript" src="https://unpkg.com/imagekit-javascript/dist/imagekit.min.js"></script>
   <script src="/js/userInfo.js"></script>
 </body>

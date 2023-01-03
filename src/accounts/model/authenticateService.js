@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const db = require("../../database/model/user");
 
+
 exports.register = async (email, password, fullname, phone, address) => {
   if (await db.emailExists(email)) {
     throw new Error("Email already exists");
@@ -33,3 +34,4 @@ exports.updatePassword = async (id, oldPassword, newPassword) => {
   const code = await db.updatePassword(id, hashedNewPassword);
   return code;
 };
+

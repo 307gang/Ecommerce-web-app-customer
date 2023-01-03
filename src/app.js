@@ -36,7 +36,12 @@ let views = [
 ];
 
 hbs.registerHelper("multiply", function (a, b) {
-  return a * b;
+  const number = a * b;
+  const formatNumber = new Intl.NumberFormat("vi-VN", {
+    style: "currency",
+    currency: "VND",
+  }).format(number);
+  return formatNumber;
 });
 
 hbs.registerHelper("multiply3", function (a, b, c) {

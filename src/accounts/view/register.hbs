@@ -41,30 +41,33 @@
                         {{/if}}
 
                         <div class="col-md-12 mt-3 mb-4">
-                            <button type="button" class="btn btn-success float-end" id="submitLoginInfo"
-                                data-bs-toggle="modal" data-bs-target="#SignUpModal">Đăng ký</button>
+                            <button type="submit" class="btn btn-success float-end" id="submitRegisterInfo">Đăng ký</button>
                         </div>
 
-                        {{!-- modal --}}
-                        <div class="modal fade" id="SignUpModal" aria-labelledby="SignUpModalLabel" aria-hidden="true"
-                            tabindex="-1">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">Thông báo</h4>
-                                        <button type="submit" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>Bạn đã đăng ký thành công.</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-outline-secondary"
-                                            data-bs-dismiss="modal">Đóng</button>
-                                        <a type="submit" class="btn btn-outline-primary" href="/account/login"
-                                            role="button">Đăng nhập</a>
-                                    </div>
+                        {{!-- toast --}}
+                        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="toast-header">
+                                    <img src="/asset/img/green-check.png" class="rounded me-2" alt="..." />
+                                    <strong class="me-auto">Thông báo</strong>
+                                    <small>Vừa xong</small>
+                                    <button type="button" class="btn-close" data-bs-dismiss="toast"
+                                        aria-label="Close"></button>
                                 </div>
+                                <div class="toast-body">
+                                    Bạn đã đăng ký thành công.
+                                </div>
+                                <script>
+                                    const toastTrigger = document.getElementById("submitRegisterInfo");
+                                    const toastLiveExample = document.getElementById("liveToast");
+                                    if (toastTrigger) {
+                                        toastTrigger.addEventListener("click",
+                                            function () {
+                                                const toast = new
+                                                    bootstrap.Toast(toastLiveExample); toast.show();
+                                            });
+                                    }
+                                </script>
                             </div>
                         </div>
                     </form>
