@@ -58,7 +58,7 @@ module.exports.addUser = async (email, password, fullname, phone, address) => {
 
 module.exports.getUserByEmail = async (email) => {
   var { rows } = await db.query(
-    "select * from users where email = $1 limit 1",
+    "select u.*, c.user_avt from users u, customers c where email = $1 and u.uuid = c.uuid limit 1",
     [email]
   );
   return rows[0];

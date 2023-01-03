@@ -20,6 +20,7 @@ const totalDatabase = require("./database/route/totalRoute");
 const passport = require("./accounts/model/authenticatePassport");
 const cartRouter = require("./cart/routes/cartRoutes");
 const imgAuth = require("./imgAuth/routes/authRoute");
+const cmtRoute = require("./product/routes/productCommentRoute");
 
 const app = express();
 
@@ -96,6 +97,7 @@ app.use("/database/brands", brandDatabase);
 app.use("/database/total", totalDatabase);
 app.use("/cart", cartRouter);
 app.use("/auth", imgAuth);
+app.use("/comment", cmtRoute);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

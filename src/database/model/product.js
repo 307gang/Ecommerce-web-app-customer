@@ -198,19 +198,29 @@ module.exports.getCommentByProductId = async (id) => {
   return rows;
 };
 
-module.exports.addComment = async (req) => {
-  const { productid } = req.params;
-  const { uuid } = req.query;
-  const { comment } = req.body;
+module.exports.addComment = async (product_id, customer_id, comment) => {
+  // const { productid } = req.params;
+  // const { uuid } = req.query;
+  // const { comment } = req.body;
 
-  dayjs.extend(relativeTime);
-  var fromNow = dayjs().fromNow();
-  // now trả ra chuỗi
-  // https://day.js.org/docs/en/display/from-now
+  // dayjs.extend(relativeTime);
+  // var fromNow = dayjs().fromNow();
+  // // now trả ra chuỗi
+  // // https://day.js.org/docs/en/display/from-now
 
-  const { rows } = await db.query(
-    "insert into comments (product_id, customer_id, comment) values ($1, $2, $3, $4)",
-    [productid, uuid, comment]
+  var { rows } = await db.query(
+    "select * from comments where customer_id = $1 and product_id = $2",
+    [customer_id, product_id]
   );
-  return rows[0];
+  if (rows[0]) {
+    await db.query(
+      "update comments set comment = $3 where product_id = $1 and customer_id = $2",
+      [product_id, customer_id, comment]
+    );
+    return;
+  }
+  await db.query(
+    "insert into comments (product_id, customer_id, comment) values ($1, $2, $3)",
+    [product_id, customer_id, comment]
+  );
 };
