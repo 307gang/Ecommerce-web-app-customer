@@ -214,13 +214,13 @@ module.exports.addComment = async (product_id, customer_id, comment) => {
   );
   if (rows[0]) {
     await db.query(
-      "update comments set comment = $3 where product_id = $1 and customer_id = $2",
+      "update comments set comment = $3, create_date = current_timestamp where product_id = $1 and customer_id = $2",
       [product_id, customer_id, comment]
     );
     return;
   }
   await db.query(
-    "insert into comments (product_id, customer_id, comment) values ($1, $2, $3)",
+    "insert into comments (product_id, customer_id, comment, create_date) values ($1, $2, $3, current_timestamp)",
     [product_id, customer_id, comment]
   );
 };

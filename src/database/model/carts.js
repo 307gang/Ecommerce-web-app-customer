@@ -58,7 +58,7 @@ module.exports.addOrder = async (customer_id, order_name, description) => {
   var rows = await this.getCart(customer_id);
   if (rows.length == 0) return;
   await db.query(
-    "insert into orders (order_id, order_name, description, customer_id, status) values ($1, $2, $3, $4, $5)",
+    "insert into orders (order_id, order_name, description, customer_id, status, create_date) values ($1, $2, $3, $4, $5, current_timestamp)",
     [id, order_name, description, customer_id, 0]
   );
   for (const product of rows) {

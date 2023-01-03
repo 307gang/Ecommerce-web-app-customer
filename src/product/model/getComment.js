@@ -11,6 +11,7 @@ module.exports = async (req) => {
       comment: value.comment,
       email: user.email,
       avatar: user.user_avt,
+      create_date: value.create_date,
     });
   }
 
