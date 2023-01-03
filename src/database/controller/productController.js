@@ -12,6 +12,7 @@ module.exports.getAllProduct = async (req, res) => {
   const { cat } = req.query;
   const { p_s, p_e } = req.query;
   const { brd } = req.query;
+  const { search } = req.query;
   if (sortBy) {
     if (cat || p_s || brd) {
       var result = await model.getAllProductSortedWithFilter(req);
@@ -21,17 +22,31 @@ module.exports.getAllProduct = async (req, res) => {
       res.send({ products: result });
     }
   } else {
-    if (cat || p_s || brd) {
+    if (cat || p_s || brd || search) {
       var result = await model.getAllProductWithFilter(req);
       res.send({ products: result });
     } else {
-      var result = await model.getAllProduct();
+      var result = await model.getAllProduct(req);
       res.send({ products: result });
     }
   }
 };
 
-module.exports.getCommentByProductIdAndUserId = async (req, res) => {
-    var result = await model.getCommentByProductIdAndUserId(req);
+module.exports.totalProduct = async (req, res) => {
+  const { cat } = req.query;
+  const { p_s, p_e } = req.query;
+  const { brd } = req.query;
+  const { search } = req.query;
+  if (cat || p_s || brd || search) {
+    var result = await model.totalProductWithFilter(req);
     res.send(result);
+  } else {
+    var result = await model.totalProduct(req);
+    res.send(result);
+  }
+};
+
+module.exports.getCommentByProductIdAndUserId = async (req, res) => {
+  var result = await model.getCommentByProductIdAndUserId(req);
+  res.send(result);
 };
