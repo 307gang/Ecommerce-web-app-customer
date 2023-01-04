@@ -6,6 +6,7 @@ module.exports = async (req, res) => {
   var { id } = req.user;
   var carts = await model1(id);
   var products = [];
+  var total = 0;
   for (const value of carts) {
     var product = await model2(value.product_id);
     var { product_name, product_image, price } = product;
@@ -15,7 +16,8 @@ module.exports = async (req, res) => {
       price: price,
       quantity: value.quantity,
     });
+    total = total + (price * value.quantity * 1000);
   }
   console.log(products);
-  res.render("cart", { total: products.length, products });
+  res.render("cart", { total: products.length, products, total });
 };

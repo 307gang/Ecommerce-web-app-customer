@@ -15,7 +15,7 @@ exports.register = async (email, password, fullname, phone, address) => {
 // TODO: check banned user
 exports.checkUserCredentials = async (email, password) => {
   const user = await db.getUserByEmail(email);
-  if (!user) return null;
+  if (!user || user.banned) return null;
   const match = await bcrypt.compare(password, user.password);
   if (!match) return null;
   return user;

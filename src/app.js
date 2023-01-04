@@ -45,7 +45,12 @@ hbs.registerHelper("multiply", function (a, b) {
 });
 
 hbs.registerHelper("multiply3", function (a, b, c) {
-  return a * b * c;
+  const number = a * b * c;
+  const formatNumber = new Intl.NumberFormat("vi-VN", {
+    style: "currency",
+    currency: "VND",
+  }).format(number);
+  return formatNumber;
 });
 
 let blocks = {};

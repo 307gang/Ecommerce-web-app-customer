@@ -41,3 +41,11 @@ insert into category_product (category_id,product_id ) values
 ('2','012'),
 ('3','013'),
 ('2','014');
+
+insert into users(uuid, email, password, admin) values
+('754c6db1-5997-4364-b4c7-f810251b4d3c',	'admin1@gmail.com',	'$2a$10$1eM2tpQhV9lSretuRscscOUxHW5mtAlbgPlPpL8Z1BDyE4ePP3p0C',	true),
+('958f1958-e239-4f7e-8b7a-d2ff0e267683',	'admin2@gmail.com',	'$2a$10$uFh2LX.p01wYCYtEH0iGieRGwq/38.i6DWkuQMRD01t9pSyhaG6w6',	true);
+
+insert into admins(uuid, full_name, phone_number) values
+('754c6db1-5997-4364-b4c7-f810251b4d3c', 'thinh', '0123456789'),
+('958f1958-e239-4f7e-8b7a-d2ff0e267683', 'khoi', '0123456789');
